@@ -1,0 +1,35 @@
+From: Ole Streicher <olebole@debian.org>
+Date: Wed, 16 Dec 2020 11:26:58 +0100
+Subject: Skip tests that need the python3-pooch package and internet
+ connection
+
+python3-pooch is not available yet (RFS #968470)
+---
+ skimage/data/tests/test_data.py                | 1 +
+ skimage/restoration/tests/test_rolling_ball.py | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/skimage/data/tests/test_data.py b/skimage/data/tests/test_data.py
+index dfc0537..cf81c74 100644
+--- a/skimage/data/tests/test_data.py
++++ b/skimage/data/tests/test_data.py
+@@ -144,6 +144,7 @@ def test_lfw_subset():
+     data.lfw_subset()
+ 
+ 
++@pytest.mark.skip(reason="Needs python3-pooch and internet connection")
+ def test_skin():
+     """Test that "skin" image can be loaded.
+ 
+diff --git a/skimage/restoration/tests/test_rolling_ball.py b/skimage/restoration/tests/test_rolling_ball.py
+index b23eca9..04b49e7 100644
+--- a/skimage/restoration/tests/test_rolling_ball.py
++++ b/skimage/restoration/tests/test_rolling_ball.py
+@@ -93,6 +93,7 @@ def test_threads(num_threads):
+                               nansafe=True, num_threads=num_threads)
+ 
+ 
++@pytest.mark.skip(reason="Needs python3-pooch and internet connection")
+ def test_ndim():
+     image = data.cells3d()[:5, 1, ...]
+     kernel = ellipsoid_kernel((3, 100, 100), 100)

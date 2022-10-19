@@ -1,0 +1,27 @@
+From: Andreas Tille <tille@debian.org>
+Date: Thu, 17 Aug 2017 22:42:30 +0200
+Subject: Skip failing test on big endian architectures
+
+---
+ skimage/io/tests/test_pil.py | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/skimage/io/tests/test_pil.py b/skimage/io/tests/test_pil.py
+index db19da2..a8188f5 100644
+--- a/skimage/io/tests/test_pil.py
++++ b/skimage/io/tests/test_pil.py
+@@ -1,4 +1,5 @@
+ import os
++import sys
+ import numpy as np
+ from io import BytesIO
+ from tempfile import NamedTemporaryFile
+@@ -249,6 +250,8 @@ def test_all_color():
+         color_check('pil', 'bmp')
+ 
+ 
++# https://github.com/scikit-image/scikit-image/issues/2120
++@testing.skipif(sys.byteorder == 'big', reason="https://github.com/scikit-image/scikit-image/issues/2120")
+ def test_all_mono():
+     with expected_warnings(['.* is a boolean image']):
+         mono_check('pil')

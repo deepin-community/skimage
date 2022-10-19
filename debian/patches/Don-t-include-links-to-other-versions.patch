@@ -1,0 +1,26 @@
+From: Ole Streicher <olebole@debian.org>
+Date: Tue, 21 Apr 2020 15:15:47 +0200
+Subject: Don't include links to other versions
+
+See https://github.com/scikit-image/scikit-image/issues/4603
+
+Closes: #955068
+---
+ doc/source/_templates/versions.html | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/doc/source/_templates/versions.html b/doc/source/_templates/versions.html
+index f514ae7..c8f25b6 100644
+--- a/doc/source/_templates/versions.html
++++ b/doc/source/_templates/versions.html
+@@ -4,10 +4,6 @@
+     <a id="other">All versions</a>
+ 
+     <ul id="versionList" style="display: none;">
+-        <script src="{{ pathto('', 1) }}../dev/_static/docversions.js"></script>
+-        <script type="text/javascript">
+-            insert_version_links();
+-        </script>
+     </ul>
+ 
+  </div>

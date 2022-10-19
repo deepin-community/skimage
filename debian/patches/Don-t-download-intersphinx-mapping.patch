@@ -1,0 +1,33 @@
+From: Yangfl <mmyangfl@gmail.com>
+Date: Wed, 17 Oct 2018 14:04:03 +0800
+Subject: Don't download intersphinx mapping
+
+---
+ doc/source/conf.py | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/doc/source/conf.py b/doc/source/conf.py
+index 962ac61..b540e88 100644
+--- a/doc/source/conf.py
++++ b/doc/source/conf.py
+@@ -382,15 +382,15 @@ plot2rst_rcparams = {'image.cmap' : 'gray',
+ _python_version_str = '{0.major}.{0.minor}'.format(sys.version_info)
+ _python_doc_base = 'https://docs.python.org/' + _python_version_str
+ intersphinx_mapping = {
+-    'python': (_python_doc_base, None),
++    'python': (_python_doc_base, '/usr/share/doc/python3.9/html/objects.inv'),
+     'numpy': ('https://numpy.org/doc/stable',
+-              (None, './_intersphinx/numpy-objects.inv')),
++              './_intersphinx/numpy-objects.inv'),
+     'scipy': ('https://docs.scipy.org/doc/scipy/reference',
+-              (None, './_intersphinx/scipy-objects.inv')),
++              './_intersphinx/scipy-objects.inv'),
+     'sklearn': ('https://scikit-learn.org/stable',
+-                (None, './_intersphinx/sklearn-objects.inv')),
++                './_intersphinx/sklearn-objects.inv'),
+     'matplotlib': ('https://matplotlib.org/',
+-                   (None, 'https://matplotlib.org/objects.inv'))
++                   '/usr/share/doc/python-matplotlib-doc/html/objects.inv')
+ }
+ 
+ # ----------------------------------------------------------------------------

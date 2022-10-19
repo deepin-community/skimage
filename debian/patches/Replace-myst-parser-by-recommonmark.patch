@@ -1,0 +1,22 @@
+From: Ole Streicher <olebole@debian.org>
+Date: Wed, 16 Dec 2020 11:56:33 +0100
+Subject: Replace myst-parser by recommonmark
+
+myst-parser is not available in Debian
+---
+ doc/source/conf.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/doc/source/conf.py b/doc/source/conf.py
+index af50b1d..f4094ff 100644
+--- a/doc/source/conf.py
++++ b/doc/source/conf.py
+@@ -40,7 +40,7 @@ extensions = ['sphinx_copybutton',
+               'sphinx.ext.intersphinx',
+               'sphinx.ext.linkcode',
+               'sphinx_gallery.gen_gallery',
+-              'myst_parser',
++              'recommonmark',
+               ]
+ 
+ autosummary_generate = True

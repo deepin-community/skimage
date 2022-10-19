@@ -1,0 +1,104 @@
+#!/usr/bin/make -f
+# -*- mode: makefile; coding: utf-8 -*-
+
+# See also: scikits-learn
+
+# don't optimize pngs, palette changes break tests and documented examples
+export NO_PNG_PKG_MANGLE := 1
+
+PY3VER  ?= $(shell py3versions -vd)
+PY3VERS ?= $(shell py3versions -vr)
+
+export DEB_BUILD_MAINT_OPTIONS := hardening=+all
+
+# upstream relies on signed chars
+export DEB_CFLAGS_MAINT_APPEND := -fsigned-char
+export DEB_LDFLAGS_MAINT_APPEND := -Wl,--as-needed
+
+# Assure Agg backend for matplotlib to avoid any possible complication
+export MPLBACKEND := Agg
+
+export PYBUILD_TEST_PYTEST := 1
+
+# Disable failures on warnings
+export SKIMAGE_TEST_STRICT_WARNINGS := False
+
+%:
+	dh $@ --with python3,sphinxdoc --buildsystem pybuild
+
+%-arch:
+	dh $@ --with python3 --buildsystem pybuild
+
+clean:
+	dh $@ --with python3 --buildsystem pybuild
+
+override_dh_clean:
+	dh_clean
+	rm -rf .pytest_cache build scikit_image.egg-info
+	rm -f debian/build-stamp-*
+	for i in $$(find -name '*.md5'); do \
+		rm -f $${i%.pyx.md5}.c $${i%.pyx.md5}.cpp $$i; \
+	done
+	for i in $$(find -name '*.pyx.in'); do \
+		rm -f $${i%.*}; \
+	done
+ifeq (,$(findstring -a,$(DH_INTERNAL_OPTIONS)))
+ifeq (,$(filter nodoc,$(DEB_BUILD_OPTIONS)))
+	+$(MAKE) -C doc clean
+	rm -f doc/source/_static/random.js
+endif
+endif
+
+override_dh_installdocs-indep:
+ifeq (,$(filter nodoc,$(DEB_BUILD_OPTIONS)))
+	# hotfix SPHINXBUILD -- remove in next release
+	+\
+		PYTHONPATH=$(CURDIR)/.pybuild/cpython3_$(PY3VER)/build:$$(python3 -c 'import sys;print(":".join(sys.path))') \
+		PYTHON=python$(PY3VER) \
+		SPHINXBUILD="python$(PY3VER) -m sphinx" \
+		SPHINXOPTS="-D mathjax_path=MathJax.js" \
+		$(MAKE) -C doc html
+endif
+	dh_installdocs -A CONTRIBUTORS.txt README.md CONTRIBUTING.txt
+
+# Test data and plugin ini not copied to .pybuild -- manually copy them
+override_dh_auto_build:
+	dh_auto_build
+	for ver in $(PY3VERS); do \
+		i=.pybuild/cpython$${ver%.*}_$$ver/build/skimage; \
+		cp skimage/io/_plugins/*.ini $$i/io/_plugins/; \
+		cp skimage/feature/orb_descriptor_positions.txt $$i/feature/; \
+		rm -rf $$i/data || true; \
+		cp -av skimage/data $$i; \
+		for module in $$(find skimage ! -path '*/data/*' -name tests | cut -sd / -f 2-); do \
+			rm -rf $$i/$$module || true; \
+			cp -av skimage/$$module $$i/$${module%/*}/; \
+		done; \
+	done
+
+override_dh_auto_test-indep:
+	# pass
+
+override_dh_auto_install:
+	dh_auto_install
+	# cleanup python3 cache (mixing python3 subversions)
+	-find debian/tmp -name "__pycache__" -exec rm -r {} +
+
+## remove .so libraries from main package, and call dh_numpy3
+override_dh_python3:
+	-find debian/python3-skimage/usr/lib -name "*.so" -delete
+
+	dh_numpy3 -ppython3-skimage-lib
+	dh_python3
+
+## immediately useable documentation and exemplar scripts/data
+override_dh_compress:
+	dh_compress -X.py -X.html -X.pdf -X.css -X.jpg -X.txt -X.js -X.json -X.rtc
+
+override_dh_sphinxdoc-indep:
+ifeq (,$(filter nodoc,$(DEB_BUILD_OPTIONS)))
+	dh_sphinxdoc -XMathJax.js -Xclipboard.min.js
+endif
+
+override_dh_strip_nondeterminism:
+	dh_strip_nondeterminism -X.png

@@ -1,0 +1,64 @@
+From: Ole Streicher <olebole@debian.org>
+Date: Wed, 18 Dec 2019 16:03:52 +0100
+Subject: Disable test that requires local server
+
+While the required package (python3-pytest-localserver) is available
+on Debian, this test fails during the startup of the localserver:
+
+```
+skimage/io/_io.py:47: in imread
+    with file_or_url_context(fname) as fname:
+/usr/lib/python3.8/contextlib.py:113: in __enter__
+    return next(self.gen)
+skimage/io/util.py:28: in file_or_url_context
+    u = urllib.request.urlopen(resource_name)
+/usr/lib/python3.8/urllib/request.py:222: in urlopen
+    return opener.open(url, data, timeout)
+/usr/lib/python3.8/urllib/request.py:525: in open
+    response = self._open(req, data)
+/usr/lib/python3.8/urllib/request.py:542: in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+/usr/lib/python3.8/urllib/request.py:502: in _call_chain
+    result = func(*args)
+/usr/lib/python3.8/urllib/request.py:1348: in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <urllib.request.HTTPHandler object at 0x7fabb4e020a0>
+http_class = <class 'http.client.HTTPConnection'>
+req = <urllib.request.Request object at 0x7fabb463b0d0>, http_conn_args = {}
+host = '127.0.0.1:9', h = <http.client.HTTPConnection object at 0x7fabb463b2b0>
+
+    def do_open(self, http_class, req, **http_conn_args):
+        [...]
+        try:
+            try:
+                h.request(req.get_method(), req.selector, req.data, headers,
+                          encode_chunked=req.has_header('Transfer-encoding'))
+            except OSError as err: # timeout error
+>               raise URLError(err)
+E               urllib.error.URLError: <urlopen error [Errno 111] Connection refused>
+```
+---
+ skimage/io/tests/test_io.py | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/skimage/io/tests/test_io.py b/skimage/io/tests/test_io.py
+index 3827179..8735fbf 100644
+--- a/skimage/io/tests/test_io.py
++++ b/skimage/io/tests/test_io.py
+@@ -1,5 +1,6 @@
+ import os
+ import tempfile
++import pytest
+ 
+ import numpy as np
+ from skimage import io
+@@ -46,6 +47,7 @@ def test_imread_file_url():
+     assert image.shape == (512, 512)
+ 
+ 
++@pytest.mark.xfail(reason="Local server does not run at build time")
+ def test_imread_http_url(httpserver):
+     # httpserver is a fixture provided by pytest-localserver
+     # https://bitbucket.org/pytest-dev/pytest-localserver/

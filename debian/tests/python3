@@ -1,0 +1,25 @@
+#!/bin/sh
+set -efux
+
+pys="$(py3versions -rv 2>/dev/null)"
+pkgbuild=${pkgbuild:-no}
+
+srcdir=$PWD
+
+export MPLBACKEND=Agg
+
+# Disable failures on warnings
+export SKIMAGE_TEST_STRICT_WARNINGS=False
+
+for py in $pys; do
+    echo "=== python$py ==="
+    if [ "$pkgbuild" = "yes" ]; then
+        module="$srcdir/debian/tmp/usr/lib/python$py/dist-packages/skimage"
+        cd "$srcdir/build/"
+    else
+        module="/usr/lib/python3/dist-packages/skimage"
+        cd "$AUTOPKGTEST_TMP"
+    fi
+
+    python$py -m pytest -s -v $module 2>&1
+done

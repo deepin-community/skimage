@@ -1,0 +1,558 @@
+skimage (0.18.3-2) UNRELEASED; urgency=medium
+
+  * update
+
+ -- Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>  Sat, 23 Jul 2022 16:00:07 +0800
+
+skimage (0.18.3-2) unstable; urgency=medium
+
+  * Completely remove binder references in sphinx_gallery (Closes: #997706)
+
+ -- Ole Streicher <olebole@debian.org>  Sun, 24 Oct 2021 17:51:10 +0200
+
+skimage (0.18.3-1) unstable; urgency=medium
+
+  * New upstream version 0.18.3
+
+ -- Ole Streicher <olebole@debian.org>  Mon, 30 Aug 2021 08:22:13 +0200
+
+skimage (0.18.2-1) unstable; urgency=medium
+
+  * New upstream version 0.18.2
+  * Rediff patches
+  * Bugfix: Enable pytest skipping at module level
+
+ -- Ole Streicher <olebole@debian.org>  Tue, 17 Aug 2021 08:37:07 +0200
+
+skimage (0.18.1-2) unstable; urgency=medium
+
+  * Allow either SyntaxError or OSError for the truncated JPG exception
+    (Closes: #990204)
+
+ -- Ole Streicher <olebole@debian.org>  Wed, 23 Jun 2021 09:09:13 +0200
+
+skimage (0.18.1-1) unstable; urgency=medium
+
+  * New upstream version 0.18.1
+
+ -- Ole Streicher <olebole@debian.org>  Sat, 26 Dec 2020 13:42:34 +0100
+
+skimage (0.18.0-1) unstable; urgency=low
+
+  * New upstream version 0.18.0
+  * Rediff patches
+  * Skip tests that need the python3-pooch package and internet connection
+  * Add plotly build dependency
+  * Push Standards-Version to 4.5.1. No changes needed
+  * Replace myst-parser by recommonmark
+  * Simplify d/copyright
+
+ -- Ole Streicher <olebole@debian.org>  Wed, 16 Dec 2020 11:04:47 +0100
+
+skimage (0.17.2-2) unstable; urgency=low
+
+  * Remove outdated link to bootstrap-responsive.css (Closes: #919852)
+  * Declare Breaks+Provides for python-skimage (Closes: #964046)
+
+ -- Ole Streicher <olebole@debian.org>  Wed, 01 Jul 2020 09:27:57 +0200
+
+skimage (0.17.2-1) unstable; urgency=low
+
+  * New upstream version 0.17.2
+  * Manually copy orb_descriptor_positions.txt
+  * Update build-dep version requirements
+  * Add python3-tifffile build dep
+  * Push dh compat to 13
+  * Add Pandas and Seaborn to (test) build deps
+  * Re-add skivi executable
+  * Add "Rules-Requires-Root: no" to d/control
+  * Disable binder reference
+  * Exclude pngs from dh_strip_nondeterminism to keep their hashes
+
+ -- Ole Streicher <olebole@debian.org>  Thu, 25 Jun 2020 12:45:53 +0200
+
+skimage (0.16.2-3) unstable; urgency=medium
+
+  * Don't include links to other versions (Closes: #955068)
+  * Add myself to the list of uploaders
+  * Resort d/copyright sections according to 'cme dpkg fix'
+
+ -- Ole Streicher <olebole@debian.org>  Tue, 21 Apr 2020 21:22:43 +0200
+
+skimage (0.16.2-2) unstable; urgency=low
+
+  * Fix arch dependent and independent builds
+  * Copy data files in dh_auto_build
+
+ -- Ole Streicher <olebole@debian.org>  Thu, 19 Dec 2019 15:22:11 +0100
+
+skimage (0.16.2-1) unstable; urgency=medium
+
+  [ Andreas Tille ]
+  * Team upload.
+  * New upstream version. Closes: #945389, #945393
+  * Standards-Version: 4.4.1
+  * More default d/rules
+  * Drop Stefan van der Walt from Uploaders since he confirmed not to
+    do packaging work any more (thanks for your previous work Stefan)
+
+  [ Ole Streicher ]
+  * Fix manual adjustment for build time tests
+  * Add imageio and sphinx-copybutton build dependencies
+  * Disable failures on warnings
+  * Wrap and sort -a
+  * Disable test that requires local server
+  * Rediff patches and adjust patch names to the Subject line
+  * Disable -j option use for sphinx
+  * Update search.html to new way of generating Sphinx search box
+  * Replace ADT_TMP this with AUTOPKGTEST_TMP
+
+ -- Ole Streicher <olebole@debian.org>  Wed, 18 Dec 2019 15:41:34 +0100
+
+skimage (0.14.2-3) unstable; urgency=medium
+
+  * Team upload
+  * Drop Python 2 support (Closes: #938494)
+  * Push Standards-Version to 4.4.0. Change homepage URL to https
+  * Push compat to 12. Remove d/compat
+  * Add gitlab-ci.yml for salsa
+
+ -- Ole Streicher <olebole@debian.org>  Fri, 13 Sep 2019 10:41:10 +0200
+
+skimage (0.14.2-2) unstable; urgency=medium
+
+  * Team upload
+  * Disable numpy matrix deprecation warnings (Closes: #924606)
+
+ -- Ole Streicher <olebole@debian.org>  Thu, 14 Mar 2019 22:58:01 +0100
+
+skimage (0.14.2-1) unstable; urgency=medium
+
+  * Team upload
+  * Switch back to unstable
+
+ -- Ole Streicher <olebole@debian.org>  Fri, 08 Feb 2019 20:32:08 +0100
+
+skimage (0.14.2-1~1) experimental; urgency=medium
+
+  * Team upload
+  * New upstream version 0.14.2
+  * Rediff Patches and switch to gbp style
+  * Switch to experimental to check for problems
+
+ -- Ole Streicher <olebole@debian.org>  Fri, 01 Feb 2019 17:51:26 +0100
+
+skimage (0.14.1-3) unstable; urgency=medium
+
+  * Team upload
+
+  [ yangfl ]
+  * Code cleanup
+  * Use Agg MPL backend for autopkgtests
+
+  [ Ole Streicher ]
+  * Handle deprecation of numpy (Closes: #917353)
+  * Fix test_mpl_imshow
+  * Add cloudpickle to build dependencies
+
+  [ Andreas Tille ]
+  * Respect DEB_BUILD_OPTIONS in override_dh_auto_test target
+  * Standards-Version: 4.3.0
+  * cme fix dpkg-control
+
+ -- Ole Streicher <olebole@debian.org>  Sun, 30 Dec 2018 18:12:33 +0100
+
+skimage (0.14.1-2) unstable; urgency=medium
+
+  * Team upload
+  * Overhaul rules and fix FTBFS on Architecture=all.
+  * Fix parallel build by adding debian/process_pyx.py and
+    debian/patches/fix-wrong-condition-on-prebuilt-c-files.patch
+  * Move build dependencies for doc package to Build-Depends-Indep.
+  * Switch matplotlib backend to Agg (export MPLBACKEND := Agg) and
+    drop build dependency on xauth and xvfb.
+
+ -- Yangfl <mmyangfl@gmail.com>  Fri, 19 Oct 2018 08:25:27 +0000
+
+skimage (0.14.1-1) unstable; urgency=medium
+
+  * Team upload
+
+  [ Mo Zhou ]
+  * Fixup testsuite (Closes: #902480).
+  * Add new deps to debian/tests/control
+  * Allow stderr during autopkgtest, some libraries are
+    throwing warnings as errors during autopkgtests.
+  * Remove deprecated X-Python*-Version fields.
+  * Run dh_auto_tests with xvfb-run.
+
+  [ Yangfl <mmyangfl@gmail.com> ]
+  * New upstream release (Closes: #906207)
+  * d/compat
+    - bump debhelper compat to 11
+  * d/control
+    - remove build dep libjs-twitter-bootstrap (Closes: #908433)
+    + build dep python-tk and python3-tk
+    + build dep python3-sphinx-gallery and python3-sklearn, required by doc
+      building
+    + build dep python3-doc and python-matplotlib-doc for intersphinx mappings
+    + dep libjs-{bootstrap,jquery,mathjax} for python-skimage-doc
+    * bump standard to 4.2.1
+  * d/copyright
+    - no need to remove bootstrap.min.js, provided in missing-sources
+  * d/rules
+    - switch from python_distutils to pybuild
+    - hotfix broken sphinx build command by passing SPHINXBUILD manually
+      (Closes: #902478)
+    - replace MathJax.js with local file (Closes: #902479)
+  * d/patches
+    - remove 0001-BF-perform-computation-serially-with-a-warning-if-da.patch
+      and skip-failing-test-on-i386.patch since included in new release
+    - add allow-warnings-on-dask.patch to bypass false alert on dask missing
+    - remove deb_no_sphinx_galery since python3-sphinx-gallery available
+    - add no-download-intersphinx-mapping.patch
+
+ -- Mo Zhou <cdluminate@gmail.com>  Wed, 17 Oct 2018 11:33:00 +0000
+
+skimage (0.14.0-1) unstable; urgency=medium
+
+  * Fresh upstream release
+    - should resolve FTBFS due to incompatibility with NumPy 1.14
+      (Closes: #901377)
+  * d/patches
+    - refreshed patches skipping on some archs.  Use testing.skipif instead
+      of explicit import of skipif into the namespace
+    - removed remove_deprecated_box-forced.patch - was CPed from upstream
+    - added 0001-BF-perform-computation-serially-with-a-warning-if-da.patch
+      to make skimage not crash whenever dask is not available
+    - added deb_no_dask_in_setup to not demand dask at setup.py leve since
+      not available for python2 in Debian
+  * d/tests,control
+    - upstream uses pytest instead of nose now
+  * d/control
+    - recommend and b-depend on python3-dask
+  * d/rules
+    - use python3 to build docs since some helper scripts are python3 only
+    - cleanup __pycache__ which might appear after running tests
+
+ -- Yaroslav Halchenko <debian@onerussian.com>  Mon, 25 Jun 2018 12:26:51 -0400
+
+skimage (0.13.1-3) unstable; urgency=medium
+
+  * Team upload.
+  * Remove deprecated box-forced matplotlib parameter (by patch from upstream
+      https://github.com/scikit-image/scikit-image/pull/2977)
+    Closes: #895769
+  * python-skimage-doc Depends: libjs-twitter-bootstrap
+    Closese: #861498
+  * cme fix dpkg-control
+     - Standards-Version: 4.1.4
+     - Point Vcs-fields to Salsa
+     - Drop unneeded version restrictions
+     - reformatting
+  * Build-Depends: s/python-sphinx/python3-sphinx/
+  * hardening=+all
+  * Enhanced description for python-skimage-doc
+  * Removed unneeded paragraphs from d/copyright
+  * Add missing DEP3 descriptions
+
+ -- Andreas Tille <tille@debian.org>  Tue, 24 Apr 2018 09:16:32 +0200
+
+skimage (0.13.1-2) unstable; urgency=medium
+
+  * Moved my changes for 0.13.1 into debian-science repo (Closes: #878848)
+    - previous changelog was adjusted to reflect also changes introduced by
+      the team
+
+ -- Yaroslav Halchenko <debian@onerussian.com>  Tue, 17 Oct 2017 07:55:38 -0400
+
+skimage (0.13.1-1) unstable; urgency=medium
+
+  * Team upload
+
+  [ Michael Hudson-Doyle ]
+  * New upstream release
+    Closes: #868582
+  * d/patches/:
+    - changeset_6807f4ee8f5501703e447f95701190c836deaae1.diff,
+      dask-optional-dep.patch, fix_shape_type.patch, search-html.patch: dropped,
+      applied upstream.
+    - fix-doc-links.patch: updated
+    - skip_tests_failing_on_some_architectures.patch: split into more targetted
+      skip-failing-test-on-i386.patch & skip-failing-test-on-big-endian.patch.
+    Closes: #871095
+  * d/rules: CONTRIBUTING.txt has moved.
+  * d/control: add dependencies on python{3,}-pywt. python{3,}-numpydoc.
+
+  [ Andreas Tille ]
+  * debhelper 10
+  * drop alternative python-imaging
+    Closes: #866480
+  * Standards-Version: 4.0.1 (no changes needed)
+
+  [ Yaroslav Halchenko ]
+  * Note that it is a redone changelog entry due to confusion among
+    multiple packaging VCS.
+  * Progressed to 0.13.1 upstream release
+  * debian/patches
+    - deb_no_sphinx_galery: to disable absent sphinx galery for now
+  * Do not exclude test_tools.py in tests, but exclude test_update_on_save
+    having issues with PIL 4.2.1
+    (see https://github.com/scikit-image/scikit-image/issues/2843)
+
+ -- Yaroslav Halchenko <debian@onerussian.com>  Tue, 10 Oct 2017 18:26:16 -0400
+
+skimage (0.12.3-9) unstable; urgency=medium
+
+  * Team upload.
+  * Fix build with nocheck.
+  * Mark python3-skimage-lib as Multi-Arch:same.
+  * Mark python-skimage-doc as Multi-Arch:foreign.
+
+ -- Mattia Rizzolo <mattia@debian.org>  Fri, 28 Apr 2017 11:24:32 +0200
+
+skimage (0.12.3-8) unstable; urgency=medium
+
+  * Re-enable tests since numpy bug #849196 is fixed now
+
+ -- Ole Streicher <olebole@debian.org>  Sat, 07 Jan 2017 14:51:42 +0100
+
+skimage (0.12.3-7) unstable; urgency=medium
+
+  * Team upload.
+  * Remove piwik privacy breach
+
+ -- Ole Streicher <olebole@debian.org>  Sat, 24 Dec 2016 13:46:17 +0100
+
+skimage (0.12.3-6) unstable; urgency=medium
+
+  * Team upload.
+  * Fix typo in d/rules
+
+ -- Ole Streicher <olebole@debian.org>  Sat, 24 Dec 2016 12:07:22 +0100
+
+skimage (0.12.3-5) unstable; urgency=medium
+
+  * Team upload.
+  * Temporarily disable build time tests completely to fix FTBFS.
+    Currently, the only fix is related to a bug in the tests infrastructure,
+    either of numpy or of skimage. Until this is fixed, the tests are
+    disabled completely to ensure the migration of an otherwise working
+    package to testing. CI tests are still enabled.
+
+ -- Ole Streicher <olebole@debian.org>  Sat, 24 Dec 2016 08:42:50 +0100
+
+skimage (0.12.3-4) unstable; urgency=medium
+
+  * Team upload.
+  * Hide another failed test (on i386)
+
+ -- Ole Streicher <olebole@debian.org>  Fri, 23 Dec 2016 17:45:36 +0100
+
+skimage (0.12.3-3) unstable; urgency=medium
+
+  [ Andreas Tille ]
+  * Team upload.
+  * Moved to Debian Science team maintenance
+  * Drop debian/gbp.conf declaring branches and tag names different from
+    Debian Science policy
+  * Add patch to ignore those tests that are failing on some architectures
+    This addresses bug #840589 and I would consider it apropriate to reduce
+    the severity of the bug until further investigation of the issues at
+    these architectures
+
+  [ Ole Streicher ]
+  * Remove dependency from python-dask. Closes: #848112
+  * Explicitely use integer as number of bins to fix FTBFS with numpy
+    1.12~
+  * Hide a (possible) numpy test bug
+  * Add bootstrap.js to d/missing-sources as source of bootstrap.min.js
+
+ -- Ole Streicher <olebole@debian.org>  Fri, 23 Dec 2016 12:07:13 +0100
+
+skimage (0.12.3-2) unstable; urgency=medium
+
+  * debian/patches
+    - changeset_6807f4ee8f5501703e447f95701190c836deaae1.diff to initialize
+      value of firstbg to avoid segfaults (Closes: #840589)
+
+ -- Yaroslav Halchenko <debian@onerussian.com>  Mon, 12 Dec 2016 12:41:31 -0500
+
+skimage (0.12.3-1) unstable; urgency=medium
+
+  [ Stefan van der Walt ]
+  * Fresh upstream release
+    - Removes lena images (Closes: #794859)
+    - Removes freeimage plugin (Closes: #783818)
+    - Fixes Sphinx 1.3 incompatibility (Closes: #788965)
+  * debian/watch now uses scikit-image-*.*.tar.gz as filename
+  * Patch: turn dask into an optional dependency
+  * debian/control
+    - boosted policy to 3.9.8
+  * debian/copyright
+    - Update license for tifffile
+    - Add imagej license for threshold_li
+    - Add license for canny edge detector
+
+  [ Gianfranco Costamagna ]
+  * VCS fields in https mode.
+  * Drop useless XS testsuite in control file.
+  * Fix copyright file
+  * Update Stefan mail address
+
+  [ Yaroslav Halchenko ]
+  * Fresh upstream release (previous version, never uploaded)
+    - includes slicing-error.patch freeimage-fix.patch
+  * Updated debian/watch to avoid deprecated redirector
+  * debian/{,tests/}control
+    - added python{,3}-networkx to {build-,}depends and Recommends
+  * debian/tests/python*
+    - for now exclude testing of test_tools.py due to #779847 in mpl
+
+ -- Stefan van der Walt <stefanv@berkeley.edu>  Mon, 23 May 2016 11:11:52 +0200
+
+skimage (0.10.1-2) unstable; urgency=medium
+
+  * build with -fsigned-char to fix test failures on unsigned ports
+  * freeimage-fix.patch: fix freeimage save/load on big endian ports
+
+ -- Julian Taylor <jtaylor.debian@googlemail.com>  Sat, 06 Sep 2014 00:08:12 +0200
+
+skimage (0.10.1-1) unstable; urgency=medium
+
+  * New upstream release
+  * depend on and use libjs-twitter-bootstrap (Closes: #736785)
+  * doc-privacy.patch: use system font for documentation
+  * build depend on python-six (>= 1.3.0) python-numpy (>= 1.6.0) and
+    cython (>= 0.17)
+  * slicing-error.patch: fix error revealed by numpy 1.9
+  * bump standard to 3.9.5
+
+ -- Julian Taylor <jtaylor.debian@googlemail.com>  Sun, 24 Aug 2014 11:38:12 +0200
+
+skimage (0.10.0-1) unstable; urgency=medium
+
+  * Fresh upstream release (Closes: #751296)
+
+ -- Yaroslav Halchenko <debian@onerussian.com>  Sat, 14 Jun 2014 07:43:58 -0400
+
+skimage (0.9.3-4) unstable; urgency=low
+
+  * debian/rules
+    don't optimize pngs in post build processors some derivatives use
+    palette changes break tests and documented examples
+
+ -- Julian Taylor <jtaylor.debian@googlemail.com>  Thu, 23 Jan 2014 20:48:51 +0100
+
+skimage (0.9.3-3) unstable; urgency=low
+
+  * debian/control
+    - swap order of Build-Depends (and Recommends just in case) to favor
+      python*-pil over python*-imaging so builders do not get confused
+      (Closes: #730678)
+
+ -- Yaroslav Halchenko <debian@onerussian.com>  Fri, 29 Nov 2013 19:50:11 -0500
+
+skimage (0.9.3-2) unstable; urgency=low
+
+  * debian/tests/control
+    - [thanks Julian Taylor] adding pil|imaging, tk, matplotlib to Depends
+
+ -- Yaroslav Halchenko <debian@onerussian.com>  Thu, 28 Nov 2013 21:46:35 -0500
+
+skimage (0.9.3-1) unstable; urgency=low
+
+  [ Stefan van der Walt ]
+  * New upstream release (Closes: #693523).
+  * Replace mentions of old package name.
+
+  [ Yaroslav Halchenko ]
+  * Merge with previous UNRELEASED changes
+  * debian/patches
+    - changeset_0eea2a48fe2dca7bbb3681fcd5b511579cad6347.diff and
+      up_correct_version removed (upstreamed)
+  * debian/rules
+    - added export http(s)_proxy to point to non-existing localhost proxy,
+      so we could guarantee no network is used at pkg build time
+  * debian/control
+    - *Depends on python{,3}-pil as well now as an alternative to
+      python{,3}-imaging due to its rename
+
+ -- Yaroslav Halchenko <debian@onerussian.com>  Sat, 23 Nov 2013 17:24:52 -0500
+
+skimage (0.8.2-2) UNRELEASED; urgency=low
+
+  [ Julian Taylor ]
+  * add python 3 packages
+  * add autopkgtests
+  * update packaging to use dh_sphinxdoc and dh_python2
+    requires search-html.patch to fix file so dh_sphinxdoc recognises it
+  * debian/patches
+    - fix-doc-links.patch: fix navbar links in documentation
+  * debian/control:
+    - wrap-and-sort
+
+ -- Yaroslav Halchenko <debian@onerussian.com>  Mon, 10 Jun 2013 15:31:21 -0400
+
+skimage (0.8.2-1) unstable; urgency=low
+
+  [ Stefan van der Walt ]
+  * Add python-qt4 as a recommended package (Closes: #684753).
+
+  [ Yaroslav Halchenko ]
+  * New upstream release
+  * ACK NMU + reincarnated the record of 0.6.1-1, which as 0.7.2-1.1 fixed
+    python-support issue
+  * debian/control
+    - boosted required cython version to 0.15
+    - boosted policy cmopliance to 3.9.4
+  * debian/patches
+    - changeset_0eea2a48fe2dca7bbb3681fcd5b511579cad6347.diff -- resolves
+      incompatibility with cython 0.19 (thanks Julian Taylor for the
+      pointer)
+    - up_correct_version -- fix upstream version to be 0.8.2 (thanks
+      Julian again)
+
+ -- Yaroslav Halchenko <debian@onerussian.com>  Mon, 03 Jun 2013 10:28:31 -0400
+
+skimage (0.7.2-1.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Rebuild to get rid of python2.6 dependencies (Closes: #707894).
+  * Build-depend on python-support (Closes: #681896).
+
+ -- Luca Falavigna <dktrkranz@debian.org>  Sun, 12 May 2013 16:33:39 +0200
+
+skimage (0.7.2-1) unstable; urgency=low
+
+  * Recent upstream release
+
+ -- Yaroslav Halchenko <debian@onerussian.com>  Sat, 01 Dec 2012 22:06:51 -0500
+
+skimage (0.6.1-1) unstable; urgency=low
+
+  * Upstream bugfix release (correctly compare dtypes in the freeimage loader
+    on all platforms).
+  * Add python-support as build dependency (Closes: #681896).
+
+ -- Stefan van der Walt <stefan@sun.ac.za>  Tue, 17 Jul 2012 15:03:25 -0400
+
+skimage (0.6-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Yaroslav Halchenko <debian@onerussian.com>  Wed, 27 Jun 2012 15:31:26 -0400
+
+skimage (0.5.0+git100-gfeb3e92-2) unstable; urgency=low
+
+  * debian/rules: globally export MPLCONFIGDIR and HOME so they would be
+    in effect also for unittests resolving FTBFS on build boxes.
+
+ -- Yaroslav Halchenko <debian@onerussian.com>  Mon, 21 May 2012 13:11:43 -0400
+
+skimage (0.5.0+git100-gfeb3e92-1) unstable; urgency=low
+
+  [ Stefan van der Walt ]
+  * Initial release. (Closes: #639820)
+
+ -- Yaroslav Halchenko <debian@onerussian.com>  Mon, 07 May 2012 22:16:14 -0400

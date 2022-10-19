@@ -1,0 +1,12 @@
+doc/examples/applications/plot_3d_image_processing.py
+doc/examples/applications/plot_human_mitosis.py
+doc/examples/applications/plot_rank_filters.py
+doc/examples/color_exposure/plot_adapt_hist_eq_3d.py
+doc/examples/color_exposure/plot_local_equalize.py
+doc/examples/data/plot_general.py
+doc/examples/data/plot_scientific.py
+doc/examples/data/plot_specific.py
+doc/examples/registration/plot_opticalflow.py
+doc/examples/segmentation/plot_marked_watershed.py
+doc/examples/segmentation/plot_rolling_ball.py
+doc/examples/segmentation/plot_trainable_segmentation.py

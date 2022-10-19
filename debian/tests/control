@@ -1,0 +1,13 @@
+Tests: python3
+Depends: python3-all,
+         python3-dask,
+         python3-matplotlib,
+         python3-networkx,
+         python3-nose,
+         python3-pandas,
+         python3-pil | python3-imaging,
+         python3-pytest,
+         python3-seaborn,
+         python3-skimage,
+         python3-tk
+Restrictions: allow-stderr
