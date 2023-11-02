@@ -1,15 +1,14 @@
 """
-=============================
-Generate structuring elements
-=============================
+==========================================
+Generate footprints (structuring elements)
+==========================================
 
 This example shows how to use functions in :py:mod:`skimage.morphology`
-to generate structuring elements.
+to generate footprints (structuring elements) for use in morphology operations.
 The title of each plot indicates the call of the function.
 
 """
 
-import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 

@@ -1,0 +1,17 @@
+From: Ole Streicher <olebole@debian.org>
+Date: Sun, 25 Jun 2023 17:05:24 +0200
+Subject: Don't try to write random.js
+
+---
+ doc/ext/skimage_extensions.py | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/doc/ext/skimage_extensions.py b/doc/ext/skimage_extensions.py
+index f09ed65..9ce3204 100644
+--- a/doc/ext/skimage_extensions.py
++++ b/doc/ext/skimage_extensions.py
+@@ -134,4 +134,3 @@ def write_random_js(app, exception):
+ 
+ def setup(app):
+     app.add_directive('naturalsortedtoctree', NaturalSortedTocTree)
+-    app.connect('build-finished', write_random_js)

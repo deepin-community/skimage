@@ -36,8 +36,7 @@ from matplotlib import pyplot as plt
 
 from skimage.measure import LineModelND, ransac
 
-
-np.random.seed(seed=1)
+rng = np.random.default_rng()
 
 # generate coordinates of line
 x = np.arange(-200, 200)
@@ -45,14 +44,14 @@ y = 0.2 * x + 20
 data = np.column_stack([x, y])
 
 # add gaussian noise to coordinates
-noise = np.random.normal(size=data.shape)
+noise = rng.normal(size=data.shape)
 data += 0.5 * noise
 data[::2] += 5 * noise[::2]
 data[::4] += 20 * noise[::4]
 
 # add faulty data
 faulty = np.array(30 * [(180., -100)])
-faulty += 10 * np.random.normal(size=faulty.shape)
+faulty += 10 * rng.normal(size=faulty.shape)
 data[:faulty.shape[0]] = faulty
 
 # fit line using all data
@@ -62,7 +61,7 @@ model.estimate(data)
 # robustly fit line only using inlier data with RANSAC algorithm
 model_robust, inliers = ransac(data, LineModelND, min_samples=2,
                                residual_threshold=1, max_trials=1000)
-outliers = inliers == False
+outliers = (inliers == False)
 
 # generate coordinates of estimated models
 line_x = np.arange(-250, 250)
@@ -85,10 +84,8 @@ plt.show()
 
 import numpy as np
 from matplotlib import pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 from skimage.measure import LineModelND, ransac
 
-np.random.seed(seed=1)
 
 # generate coordinates of line
 point = np.array([0, 0, 0], dtype='float')
@@ -96,7 +93,7 @@ direction = np.array([1, 1, 1], dtype='float') / np.sqrt(3)
 xyz = point + 10 * np.arange(-100, 100)[..., np.newaxis] * direction
 
 # add gaussian noise to coordinates
-noise = np.random.normal(size=xyz.shape)
+noise = rng.normal(size=xyz.shape)
 xyz += 0.5 * noise
 xyz[::2] += 20 * noise[::2]
 xyz[::4] += 100 * noise[::4]

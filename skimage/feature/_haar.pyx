@@ -2,7 +2,6 @@
 #cython: boundscheck=False
 #cython: nonecheck=False
 #cython: wraparound=False
-#distutils: language=c++
 
 import numpy as np
 
@@ -28,7 +27,6 @@ cdef vector[vector[Rectangle]] _haar_like_feature_coord(
     """Private function to compute the coordinates of all Haar-like features.
     """
     cdef:
-        Py_ssize_t max_feature = height * height * width * width
         vector[vector[Rectangle]] rect_feat
         Rectangle single_rect
         Py_ssize_t n_rectangle
@@ -46,8 +44,8 @@ cdef vector[vector[Rectangle]] _haar_like_feature_coord(
 
     for y in range(height):
         for x in range(width):
-            for dy in range(1, height):
-                for dx in range(1, width):
+            for dy in range(1, height + 1):
+                for dx in range(1, width + 1):
                     # type -> 2 rectangles split along x axis
                     if (feature_type == 0 and
                             (y + dy <= height and x + 2 * dx <= width)):

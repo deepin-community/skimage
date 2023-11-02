@@ -8,15 +8,15 @@ myst-parser is not available in Debian
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/doc/source/conf.py b/doc/source/conf.py
-index af50b1d..f4094ff 100644
+index 8038a3c..7ffce5e 100644
 --- a/doc/source/conf.py
 +++ b/doc/source/conf.py
-@@ -40,7 +40,7 @@ extensions = ['sphinx_copybutton',
-               'sphinx.ext.intersphinx',
-               'sphinx.ext.linkcode',
-               'sphinx_gallery.gen_gallery',
--              'myst_parser',
-+              'recommonmark',
-               ]
+@@ -54,7 +54,7 @@ extensions = [
+     "numpydoc",
+     "sphinx_design",
+     "matplotlib.sphinxext.plot_directive",
+-    "myst_parser",
++    "recommonmark",
+     "skimage_extensions",
+ ]
  
- autosummary_generate = True

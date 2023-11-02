@@ -1,8 +1,7 @@
-import os
 from tempfile import NamedTemporaryFile
 
 import numpy as np
-from skimage import data, io
+from skimage import io
 from skimage.io import imread, imsave, use_plugin, reset_plugins
 
 from skimage._shared import testing
@@ -27,7 +26,7 @@ def test_imread_as_gray():
     assert img.dtype == np.float64
     img = imread(fetch('data/camera.png'), as_gray=True)
     # check that conversion does not happen for a gray image
-    assert np.sctype2char(img.dtype) in np.typecodes['AllInteger']
+    assert np.core.numerictypes.sctype2char(img.dtype) in np.typecodes['AllInteger']
 
 
 def test_imread_palette():
@@ -50,9 +49,9 @@ def test_bilevel():
 
 class TestSave(TestCase):
     def roundtrip(self, x, scaling=1):
-        f = NamedTemporaryFile(suffix='.png')
-        fname = f.name
-        f.close()
+        with NamedTemporaryFile(suffix='.png') as f:
+            fname = f.name
+
         imsave(fname, x)
         y = imread(fname)
 

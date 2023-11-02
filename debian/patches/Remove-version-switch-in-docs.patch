@@ -1,0 +1,21 @@
+From: Ole Streicher <olebole@debian.org>
+Date: Sun, 25 Jun 2023 17:21:13 +0200
+Subject: Remove version switch in docs
+
+---
+ doc/source/conf.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/doc/source/conf.py b/doc/source/conf.py
+index 7ffce5e..18c8d88 100644
+--- a/doc/source/conf.py
++++ b/doc/source/conf.py
+@@ -157,7 +157,7 @@ html_theme_options = {
+         },
+     ],
+     "navbar_align": "left",
+-    "navbar_end": ["version-switcher", "navbar-icon-links"],
++    "navbar_end": ["navbar-icon-links"],
+     "show_prev_next": False,
+     "switcher": {
+         "json_url": (

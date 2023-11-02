@@ -19,7 +19,6 @@ from mpl_toolkits.mplot3d import Axes3D
 
 import numpy as np
 from skimage import exposure, util
-import imageio as io
 
 
 # Prepare data and apply histogram equalization
@@ -51,14 +50,14 @@ clip_limit = 0.9
 
 # Perform histogram equalization
 im_orig_he, im_degraded_he = \
-    [exposure.equalize_hist(im)
-     for im in [im_orig, im_degraded]]
+    (exposure.equalize_hist(im)
+     for im in [im_orig, im_degraded])
 
 im_orig_ahe, im_degraded_ahe = \
-    [exposure.equalize_adapthist(im,
+    (exposure.equalize_adapthist(im,
                                  kernel_size=kernel_size,
                                  clip_limit=clip_limit)
-     for im in [im_orig, im_degraded]]
+     for im in [im_orig, im_degraded])
 
 
 # Define functions to help plot the data
@@ -140,7 +139,7 @@ for iax, ax in enumerate(axs[:]):
         ax.plot((line * rect_shape)[:, 0] - 1,
                 (line * rect_shape)[:, 1] - 1,
                 (line * rect_shape)[:, 2] - 1,
-                linewidth=1, color='grey')
+                linewidth=1, color='gray')
 
 # Add boxes illustrating the kernels
 ns = np.array(im_orig.shape) // kernel_size - 1
@@ -167,7 +166,7 @@ axs[3].scatter(xs=np.arange(len(sigmoid)),
                c=scalars_to_rgba(sigmoid,
                                  cmap=cmap, vmin=0, vmax=1, alpha=1.)[:, :3])
 
-# Subplot aesthetics (optimized for matplotlib 3.3)
+# Subplot aesthetics
 for iax, ax in enumerate(axs[:]):
 
     # Get rid of panes and axis lines
@@ -210,7 +209,7 @@ plt.subplots_adjust(left=0.05,
 rect_ax = fig.add_axes([0, 0, 1, 1], facecolor='none')
 rect_ax.set_axis_off()
 rect = patches.Rectangle((0.68, 0.01), 0.315, 0.98,
-                         edgecolor='grey', facecolor='none',
+                         edgecolor='gray', facecolor='none',
                          linewidth=2, linestyle='--')
 rect_ax.add_patch(rect)
 

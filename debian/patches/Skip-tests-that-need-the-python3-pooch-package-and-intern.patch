@@ -5,15 +5,45 @@ Subject: Skip tests that need the python3-pooch package and internet
 
 python3-pooch is not available yet (RFS #968470)
 ---
- skimage/data/tests/test_data.py                | 1 +
- skimage/restoration/tests/test_rolling_ball.py | 1 +
- 2 files changed, 2 insertions(+)
+ skimage/data/tests/test_data.py                          | 16 ++++++++++++++++
+ skimage/filters/rank/tests/test_rank.py                  |  3 +--
+ skimage/measure/tests/test_blur_effect.py                |  2 ++
+ skimage/morphology/tests/test_gray.py                    |  2 ++
+ .../tests/test_masked_phase_cross_correlation.py         |  1 +
+ .../registration/tests/test_phase_cross_correlation.py   |  1 +
+ skimage/restoration/tests/test_restoration.py            |  1 +
+ skimage/restoration/tests/test_rolling_ball.py           |  1 +
+ 8 files changed, 25 insertions(+), 2 deletions(-)
 
 diff --git a/skimage/data/tests/test_data.py b/skimage/data/tests/test_data.py
-index dfc0537..cf81c74 100644
+index 4391c34..9a23cbb 100644
 --- a/skimage/data/tests/test_data.py
 +++ b/skimage/data/tests/test_data.py
-@@ -144,6 +144,7 @@ def test_lfw_subset():
+@@ -7,6 +7,15 @@ import os
+ import pytest
+ 
+ 
++@pytest.mark.skip(reason="test fails without pooch")
++def test_data_dir():
++    # data_dir should be a directory people can use as a standard directory
++    # https://github.com/scikit-image/scikit-image/pull/3945#issuecomment-498141893
++    data_dir = data.data_dir
++    assert 'astronaut.png' in os.listdir(data_dir)
++
++
++@pytest.mark.skip(reason="requires data downloaded from internet")
+ def test_download_all_with_pooch():
+     # jni first wrote this test with the intention of
+     # fully deleting the files in the data_dir,
+@@ -62,6 +71,7 @@ def test_coffee():
+     data.coffee()
+ 
+ 
++@pytest.mark.skip(reason="requires data downloaded from internet")
+ def test_eagle():
+     """ Test that "eagle" image can be loaded. """
+     # Fetching the data through the testing module will
+@@ -138,6 +148,7 @@ def test_lfw_subset():
      data.lfw_subset()
  
  
@@ -21,12 +51,153 @@ index dfc0537..cf81c74 100644
  def test_skin():
      """Test that "skin" image can be loaded.
  
+@@ -152,6 +163,7 @@ def test_cell():
+     data.cell()
+ 
+ 
++@pytest.mark.skip(reason="requires data downloaded from internet")
+ def test_cells3d():
+     """Needs internet connection."""
+     path = fetch('data/cells3d.tif')
+@@ -159,6 +171,7 @@ def test_cells3d():
+     assert image.shape == (60, 2, 256, 256)
+ 
+ 
++@pytest.mark.skip(reason="requires data downloaded from internet")
+ def test_brain_3d():
+     """Needs internet connection."""
+     path = fetch('data/brain.tiff')
+@@ -166,6 +179,7 @@ def test_brain_3d():
+     assert image.shape == (10, 256, 256)
+ 
+ 
++@pytest.mark.skip(reason="requires data downloaded from internet")
+ def test_kidney_3d_multichannel():
+     """Test that 3D multichannel image of kidney tissue can be loaded.
+ 
+@@ -176,6 +190,7 @@ def test_kidney_3d_multichannel():
+     assert kidney.shape == (16, 512, 512, 3)
+ 
+ 
++@pytest.mark.skip(reason="requires data downloaded from internet")
+ def test_lily_multichannel():
+     """Test that microscopy image of lily of the valley can be loaded.
+ 
+@@ -186,6 +201,7 @@ def test_lily_multichannel():
+     assert lily.shape == (922, 922, 4)
+ 
+ 
++@pytest.mark.skip(reason="requires data downloaded from internet")
+ def test_vortex():
+     fetch('data/pivchallenge-B-B001_1.tif')
+     fetch('data/pivchallenge-B-B001_2.tif')
+diff --git a/skimage/filters/rank/tests/test_rank.py b/skimage/filters/rank/tests/test_rank.py
+index 01fe1b9..9c0b288 100644
+--- a/skimage/filters/rank/tests/test_rank.py
++++ b/skimage/filters/rank/tests/test_rank.py
+@@ -56,7 +56,6 @@ def test_subtract_mean_underflow_correction(dtype):
+ # Note: Explicitly read all values into a dict. Otherwise, stochastic test
+ #       failures related to I/O can occur during parallel test cases.
+ ref_data = dict(np.load(fetch("data/rank_filter_tests.npz")))
+-ref_data_3d = dict(np.load(fetch('data/rank_filters_tests_3d.npz')))
+ 
+ 
+ @pytest.mark.parametrize(
+@@ -104,7 +103,6 @@ class TestRank:
+         self.footprint = morphology.disk(1)
+         self.footprint_3d = morphology.ball(1)
+         self.refs = ref_data
+-        self.refs_3d = ref_data_3d
+ 
+     @pytest.mark.parametrize('outdt', [None, np.float32, np.float64])
+     @pytest.mark.parametrize('filter', all_rank_filters)
+@@ -165,6 +163,7 @@ class TestRank:
+                    'enhance_contrast', 'pop', 'sum', 'threshold',
+                    'noise_filter', 'entropy']
+     )
++    @pytest.mark.skip(reason="requires data downloaded from internet")
+     def test_rank_filters_3D(self, filter, outdt):
+         @run_in_parallel(warnings_matching=['Possible precision loss'])
+         def check():
+diff --git a/skimage/measure/tests/test_blur_effect.py b/skimage/measure/tests/test_blur_effect.py
+index 22bfeef..adeef87 100644
+--- a/skimage/measure/tests/test_blur_effect.py
++++ b/skimage/measure/tests/test_blur_effect.py
+@@ -1,3 +1,4 @@
++import pytest
+ from numpy.testing import assert_array_equal
+ 
+ from skimage.color import rgb2gray
+@@ -44,6 +45,7 @@ def test_blur_effect_channel_axis():
+     assert_array_equal(B0_arr, B1_arr)
+ 
+ 
++@pytest.mark.skip(reason="Needs python3-pooch and internet connection")
+ def test_blur_effect_3d():
+     """Test that the blur metric works on a 3D image."""
+     image_3d = cells3d()[:, 1, :, :]  # grab just the nuclei
+diff --git a/skimage/morphology/tests/test_gray.py b/skimage/morphology/tests/test_gray.py
+index f9d9223..5173f64 100644
+--- a/skimage/morphology/tests/test_gray.py
++++ b/skimage/morphology/tests/test_gray.py
+@@ -371,6 +371,7 @@ def test_octagon_decomposition(cam_image, function, m, n, decomposition):
+         assert_array_equal(expected, out)
+ 
+ 
++@pytest.mark.skip(reason="requires data downloaded from internet")
+ @pytest.mark.parametrize(
+     "function", ["erosion", "dilation", "closing", "opening", "white_tophat",
+                  "black_tophat"],
+@@ -390,6 +391,7 @@ def test_cube_decomposition(cell3d_image, function, size, decomposition):
+     assert_array_equal(expected, out)
+ 
+ 
++@pytest.mark.skip(reason="requires data downloaded from internet")
+ @pytest.mark.parametrize(
+     "function", ["erosion", "dilation", "closing", "opening", "white_tophat",
+                  "black_tophat"],
+diff --git a/skimage/registration/tests/test_masked_phase_cross_correlation.py b/skimage/registration/tests/test_masked_phase_cross_correlation.py
+index 63bc842..0d5c205 100644
+--- a/skimage/registration/tests/test_masked_phase_cross_correlation.py
++++ b/skimage/registration/tests/test_masked_phase_cross_correlation.py
+@@ -59,6 +59,7 @@ def test_masked_registration_random_masks():
+     assert_equal(measured_shift, -np.array(shift))
+ 
+ 
++@pytest.mark.skip(reason="Needs python3-pooch and internet connection")
+ def test_masked_registration_3d_contiguous_mask():
+     """masked_register_translation should be able to register translations
+     between volumes with contiguous masks."""
+diff --git a/skimage/registration/tests/test_phase_cross_correlation.py b/skimage/registration/tests/test_phase_cross_correlation.py
+index 386137b..102e3ac 100644
+--- a/skimage/registration/tests/test_phase_cross_correlation.py
++++ b/skimage/registration/tests/test_phase_cross_correlation.py
+@@ -183,6 +183,7 @@ def test_mismatch_offsets_size():
+                        axis_offsets=[3, 2, 1, 4])
+ 
+ 
++@pytest.mark.skip(reason="requires data downloaded from internet")
+ @pytest.mark.parametrize(
+         ('shift0', 'shift1'),
+         itertools.product((100, -100, 350, -350), (100, -100, 350, -350)),
+diff --git a/skimage/restoration/tests/test_restoration.py b/skimage/restoration/tests/test_restoration.py
+index 30c9c55..4fbcead 100644
+--- a/skimage/restoration/tests/test_restoration.py
++++ b/skimage/restoration/tests/test_restoration.py
+@@ -163,6 +163,7 @@ def test_richardson_lucy(ndim):
+ 
+ @pytest.mark.parametrize('dtype_image', [np.float16, np.float32, np.float64])
+ @pytest.mark.parametrize('dtype_psf', [np.float32, np.float64])
++@pytest.mark.skip(reason="requires data downloaded from internet")
+ def test_richardson_lucy_filtered(dtype_image, dtype_psf):
+     if dtype_image == np.float64:
+         atol = 1e-8
 diff --git a/skimage/restoration/tests/test_rolling_ball.py b/skimage/restoration/tests/test_rolling_ball.py
-index b23eca9..04b49e7 100644
+index 71364f3..e80e39d 100644
 --- a/skimage/restoration/tests/test_rolling_ball.py
 +++ b/skimage/restoration/tests/test_rolling_ball.py
-@@ -93,6 +93,7 @@ def test_threads(num_threads):
-                               nansafe=True, num_threads=num_threads)
+@@ -97,6 +97,7 @@ def test_threads(num_threads):
+     rolling_ball(img, radius=10, nansafe=True, num_threads=num_threads)
  
  
 +@pytest.mark.skip(reason="Needs python3-pooch and internet connection")

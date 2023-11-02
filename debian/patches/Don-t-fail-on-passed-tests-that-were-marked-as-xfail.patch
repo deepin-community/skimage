@@ -1,0 +1,20 @@
+From: Ole Streicher <olebole@debian.org>
+Date: Wed, 4 Oct 2023 10:46:09 +0200
+Subject: Don't fail on passed tests that were marked as xfail
+
+---
+ pyproject.toml | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/pyproject.toml b/pyproject.toml
+index e6243de..8e1d334 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -198,7 +198,6 @@ convention = 'numpy'
+ minversion = "6.0"
+ addopts = "-ra  --strict-config  --strict-markers"
+ log_cli_level = "INFO"
+-xfail_strict = true
+ #testpaths = ["skimage", "../../../../../benchmarks"]
+ python_files = ["benchmark_*.py", "test_*.py"]
+ python_classes = ["Test*", "*Suite"]

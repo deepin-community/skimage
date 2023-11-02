@@ -1,0 +1,22 @@
+From: Ole Streicher <olebole@debian.org>
+Date: Tue, 11 Jul 2023 19:23:31 +0200
+Subject: Skip 16-bit roundtrip PNG test
+
+https://github.com/scikit-image/scikit-image/issues/6994
+---
+ skimage/io/tests/test_imageio.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/skimage/io/tests/test_imageio.py b/skimage/io/tests/test_imageio.py
+index a434370..59cf026 100644
+--- a/skimage/io/tests/test_imageio.py
++++ b/skimage/io/tests/test_imageio.py
+@@ -49,7 +49,7 @@ class TestSave:
+             # float32, float64 can't be saved as PNG and raise
+             # uint32 is not roundtripping properly
+             ((10, 10), np.uint8),
+-            ((10, 10), np.uint16),
++            # ((10, 10), np.uint16), #  https://github.com/scikit-image/scikit-image/issues/6994
+             ((10, 10, 2), np.uint8),
+             ((10, 10, 3), np.uint8),
+             ((10, 10, 4), np.uint8),

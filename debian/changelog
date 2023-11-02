@@ -1,8 +1,132 @@
-skimage (0.18.3-2) UNRELEASED; urgency=medium
+skimage (0.22.0-2) unstable; urgency=medium
 
-  * update
+  * Increase tolerance for moments test on 32 bit (again)
 
- -- Debian Science Maintainers <debian-science-maintainers@lists.alioth.debian.org>  Sat, 23 Jul 2022 16:00:07 +0800
+ -- Ole Streicher <olebole@debian.org>  Thu, 05 Oct 2023 08:46:12 +0200
+
+skimage (0.22.0-1) unstable; urgency=medium
+
+  * New upstream version 0.22.0
+  * Rediff patches
+  * Don't fail on passed tests that were marked as xfail
+  * Don't use plot_cornea_spot_inpainting.py because of remote access
+  * Add numpydoc to test deps
+
+ -- Ole Streicher <olebole@debian.org>  Wed, 04 Oct 2023 13:51:49 +0200
+
+skimage (0.21.0-5) unstable; urgency=medium
+
+  * Build depend on python3-imageio (>= 2.31.1-1) (Closes: #1040994)
+
+ -- Ole Streicher <olebole@debian.org>  Thu, 13 Jul 2023 22:22:55 +0200
+
+skimage (0.21.0-4) unstable; urgency=medium
+
+  * Skip 16-bit roundtrip PNG test failing on S390x
+
+ -- Ole Streicher <olebole@debian.org>  Tue, 11 Jul 2023 19:24:36 +0200
+
+skimage (0.21.0-3) unstable; urgency=medium
+
+  * Mark tests that fail on some platforms
+
+ -- Ole Streicher <olebole@debian.org>  Tue, 11 Jul 2023 11:16:40 +0200
+
+skimage (0.21.0-2) unstable; urgency=medium
+
+  * Drop Don-t-import-unavailable-imageio.v3.patch: package is available now
+  * Switch back to unstable
+
+ -- Ole Streicher <olebole@debian.org>  Mon, 10 Jul 2023 15:39:10 +0200
+
+skimage (0.21.0-1) experimental; urgency=medium
+
+  * New upstream version 0.21.0
+  * Rediff patches
+  * Remove unneeded min-versions from build-deps
+  * Remove outdated Breaks/Replaces for python-skimage
+  * Update build dependencies
+  * Add new download-dependent patches to skip
+  * Use Python3 versions of python and cython in build
+  * Don't import unavailable imageio.v3
+  * Remove skivi script: removed upstream
+  * Don't try to write random.js
+  * Remove version switch in docs
+  * Remove examples that need external data access
+  * Upload to experimental to play with it
+
+ -- Ole Streicher <olebole@debian.org>  Sun, 25 Jun 2023 17:38:04 +0200
+
+skimage (0.19.3-8) unstable; urgency=medium
+
+  * Disable test_lab_lch_roundtrip_dtypes (avoid test failure on s390x)
+
+ -- Ole Streicher <olebole@debian.org>  Tue, 17 Jan 2023 08:20:44 +0100
+
+skimage (0.19.3-7) unstable; urgency=medium
+
+  * Temporarily remove python3-dask from build dependencies
+
+ -- Ole Streicher <olebole@debian.org>  Sun, 15 Jan 2023 14:02:53 +0100
+
+skimage (0.19.3-6) unstable; urgency=medium
+
+  * Team upload.
+  * Fix Numpy 1.24 issues
+  * No tab in license text (routine-update)
+  * watch file standard 4 (routine-update)
+
+ -- Andreas Tille <tille@debian.org>  Thu, 12 Jan 2023 18:35:28 +0100
+
+skimage (0.19.3-5) unstable; urgency=medium
+
+  * Pragmatically mark tests xfail that fail on mipsel
+
+ -- Ole Streicher <olebole@debian.org>  Wed, 04 Jan 2023 08:35:27 +0100
+
+skimage (0.19.3-4) unstable; urgency=medium
+
+  * Remove matplotlib-doc from build dependencies (Closes: #1027596)
+  * Push Standards-Version to 4.6.2. No changes
+  * Add d/u/metadata
+  * Update plot_euler_number.py for maplotlib 3.6 compatibility
+
+ -- Ole Streicher <olebole@debian.org>  Mon, 02 Jan 2023 17:32:00 +0100
+
+skimage (0.19.3-3) unstable; urgency=medium
+
+  * Fix installation failure with setuptools > 60 (Closes: #1022461)
+
+ -- Ole Streicher <olebole@debian.org>  Mon, 24 Oct 2022 08:52:33 +0200
+
+skimage (0.19.3-2) unstable; urgency=medium
+
+  * Update test dependencies; remove deprecated python3-nose test dep
+    Closes: #1018638
+  * Push Standards-Version to 4.6.1. No changes needed
+
+ -- Ole Streicher <olebole@debian.org>  Fri, 02 Sep 2022 10:59:31 +0200
+
+skimage (0.19.3-1) unstable; urgency=medium
+
+  * New upstream version 0.19.3
+  * Rediff patches. Drop patches applied upstream.
+  * Drop versionized build deps where applicable
+  * Push Standards-Version to 4.6.0. No changes needed
+  * Add new build dependencies python3-pythran, python3-pooch
+  * Skip more files that require pooch and internet
+  * Remove use of deprecated kwargs from test_tifffile_kwarg_passthrough
+    (Closes: #1010430)
+
+ -- Ole Streicher <olebole@debian.org>  Sat, 25 Jun 2022 19:45:33 +0200
+
+skimage (0.18.3-3) unstable; urgency=medium
+
+  * Remove use of deprecated kwargs from test_tifffile_kwarg_passthrough
+    (Closes: #1010430)
+  * handle PIL palettes with <256 colors (Closes: #1009431)
+
+ -- Ole Streicher <olebole@debian.org>  Wed, 08 Jun 2022 18:33:48 +0200
 
 skimage (0.18.3-2) unstable; urgency=medium
 
