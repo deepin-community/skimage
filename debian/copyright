@@ -27,21 +27,21 @@ Files: skimage/filters/_ctmf.pyx skimage/filters/edges.py
        skimage/feature/_canny.py
 Copyright: 2003-2009 Massachusetts Institute of Technology
            2009-2011 Broad Institute
-	   2003-2005 Peter J. Verveer
+           2003-2005 Peter J. Verveer
 License: BSD-3-Clause
 
 Files: skimage/filters/thresholding.py skimage/graph/_mcp.pyx skimage/graph/heap.pyx
 Copyright: 2009-2015 Board of Regents of the University of
            Wisconsin-Madison, Broad Institute of MIT and Harvard, and Max Planck
            Institute of Molecular Cell Biology and Genetics
-	   2009 Zachary Pincus
-	   2009 Almar Klein
+           2009 Zachary Pincus
+           2009 Almar Klein
 License: BSD-2-Clause
 
 Files: debian/*
 Copyright: 2010-2016 Yaroslav Halchenko <debian@onerussian.com>
            2018 Yangfl <mmyangfl@gmail.com>
-	   2019-2020 Ole Streicher <olebole@debian.org>
+           2019-2020 Ole Streicher <olebole@debian.org>
 License: BSD-3-Clause
 
 License: BSD-2-Clause

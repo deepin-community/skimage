@@ -4,12 +4,12 @@
 A crash course on NumPy for images
 ==================================
 
-Images in ``scikit-image`` are represented by NumPy ndarrays. Hence, many 
-common operations can be achieved using standard NumPy methods for 
+Images in ``scikit-image`` are represented by NumPy ndarrays. Hence, many
+common operations can be achieved using standard NumPy methods for
 manipulating arrays::
 
-    >>> from skimage import data
-    >>> camera = data.camera()
+    >>> import skimage as ski
+    >>> camera = ski.data.camera()
     >>> type(camera)
     <type 'numpy.ndarray'>
 
@@ -67,6 +67,7 @@ Masking (indexing with masks of booleans)::
 
 Fancy indexing (indexing with sets of indices)::
 
+    >>> import numpy as np
     >>> inds_r = np.arange(len(camera))
     >>> inds_c = 4 * inds_r % len(camera)
     >>> camera[inds_r, inds_c] = 0
@@ -101,7 +102,7 @@ Color images
 All of the above remains true for color images. A color image is a
 NumPy array with an additional trailing dimension for the channels::
 
-    >>> cat = data.chelsea()
+    >>> cat = ski.data.chelsea()
     >>> type(cat)
     <type 'numpy.ndarray'>
     >>> cat.shape
@@ -121,15 +122,19 @@ We can also use 2D boolean masks for 2D multichannel images, as we did with
 the grayscale image above:
 
 .. plot::
+   :caption: Using a 2D mask on a 2D color image
 
-    Using a 2D mask on a 2D color image
+   import skimage as ski
+   cat = ski.data.chelsea()
+   reddish = cat[:, :, 0] > 160
+   cat[reddish] = [0, 255, 0]
+   plt.imshow(cat)
 
-    >>> from skimage import data
-    >>> cat = data.chelsea()
-    >>> reddish = cat[:, :, 0] > 160
-    >>> cat[reddish] = [0, 255, 0]
-    >>> plt.imshow(cat)
-
+The example color images included in :mod:`skimage.data` have channels stored
+along the last axis, although other software may follow different conventions.
+The scikit-image library functions supporting color images have a
+``channel_axis`` argument that can be used to specify which axis of an array
+corresponds to channels.
 
 .. _numpy-images-coordinate-conventions:
 
@@ -138,7 +143,7 @@ Coordinate conventions
 
 Because ``scikit-image`` represents images using NumPy arrays, the
 coordinate conventions must match. Two-dimensional (2D) grayscale images
-(such as `camera` above) are indexed by rows and columns (abbreviated to
+(such as ``camera`` above) are indexed by rows and columns (abbreviated to
 either ``(row, col)`` or ``(r, c)``), with the lowest element ``(0, 0)``
 at the top-left corner. In various parts of the library, you will
 also see ``rr`` and ``cc`` refer to lists of row and column
@@ -147,51 +152,60 @@ denote standard Cartesian coordinates, where ``x`` is the horizontal coordinate,
 ``y`` - the vertical one, and the origin is at the bottom left
 (Matplotlib axes, for example, use this convention).
 
-In the case of multichannel images, the last dimension is used for color channels
-and is denoted by ``channel`` or ``ch``.
+In the case of multichannel images, any dimension (array axis) can be used for
+color channels, and is denoted by ``channel`` or ``ch``. Prior to scikit-image
+0.19, this channel dimension was always last, but in the current release the
+channel dimension can be specified by a ``channel_axis`` argument. Functions
+that require multichannel data default to ``channel_axis=-1``. Otherwise,
+functions default to ``channel_axis=None``, indicating that no axis is
+assumed to correspond to channels.
 
 Finally, for volumetric (3D) images, such as videos, magnetic resonance imaging
-(MRI) scans, confocal microscopy, etc. we refer to the leading dimension
+(MRI) scans, confocal microscopy, etc., we refer to the leading dimension
 as ``plane``, abbreviated as ``pln`` or ``p``.
 
 These conventions are summarized below:
 
-.. table:: Dimension name and order conventions in scikit-image
+.. table:: *Dimension name and order conventions in scikit-image*
 
-  =========================   ========================================
+  =========================   =============================
   Image type                  Coordinates
-  =========================   ========================================
+  =========================   =============================
   2D grayscale                (row, col)
   2D multichannel (eg. RGB)   (row, col, ch)
   3D grayscale                (pln, row, col)
   3D multichannel             (pln, row, col, ch)
-  =========================   ========================================
+  =========================   =============================
 
+Note that the position of ``ch`` is controlled by the ``channel_axis``
+argument.
+
+|
 
 Many functions in ``scikit-image`` can operate on 3D images directly::
 
-    >>> im3d = np.random.rand(100, 1000, 1000)
-    >>> from skimage import morphology
-    >>> from scipy import ndimage as ndi
-    >>> seeds = ndi.label(im3d < 0.1)[0]
-    >>> ws = morphology.watershed(im3d, seeds)
+    >>> import numpy as np
+    >>> import scipy as sp
+    >>> import skimage as ski
+    >>> rng = np.random.default_rng()
+    >>> im3d = rng.random((100, 1000, 1000))
+    >>> seeds = sp.ndimage.label(im3d < 0.1)[0]
+    >>> ws = ski.morphology.watershed(im3d, seeds)
 
 In many cases, however, the third spatial dimension has lower resolution
 than the other two. Some ``scikit-image`` functions provide a ``spacing``
 keyword argument to help handle this kind of data::
 
-    >>> from skimage import segmentation
-    >>> slics = segmentation.slic(im3d, spacing=[5, 1, 1], multichannel=False)
+    >>> slics = ski.segmentation.slic(im3d, spacing=[5, 1, 1], channel_axis=None)
 
 Other times, the processing must be done plane-wise. When planes are stacked
 along the leading dimension (in agreement with our convention), the following
 syntax can be used::
 
-    >>> from skimage import filters
     >>> edges = np.empty_like(im3d)
     >>> for pln, image in enumerate(im3d):
-    ...     # Iterate over the leading dimension 
-    ...     edges[pln] = filters.sobel(image)
+    ...     # Iterate over the leading dimension
+    ...     edges[pln] = ski.filters.sobel(image)
 
 
 Notes on the order of array dimensions
@@ -214,7 +228,8 @@ is the same::
     ...         arr[:, :, plane] *= scalar
     ...
     >>> import time
-    >>> im3d = np.random.rand(100, 1024, 1024)
+    >>> rng = np.random.default_rng()
+    >>> im3d = rng.random((100, 1024, 1024))
     >>> t0 = time.time(); x = in_order_multiply(im3d, 5); t1 = time.time()
     >>> print("%.2f seconds" % (t1 - t0))  # doctest: +SKIP
     0.14 seconds
@@ -248,11 +263,11 @@ shape (t, pln, row, col, ch)::
 
 We can then supplement the above table as follows:
 
-.. table:: Addendum to dimension names and orders in scikit-image
+.. table:: *Addendum to dimension names and orders in scikit-image*
 
-  ========================   ========================================
+  ========================   =========================================
   Image type                 coordinates
-  ========================   ========================================
+  ========================   =========================================
   2D color video             (t, row, col, ch)
-  3D multichannel video      (t, pln, row, col, ch)
-  ========================   ========================================
+  3D color video             (t, pln, row, col, ch)
+  ========================   =========================================

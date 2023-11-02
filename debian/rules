@@ -2,6 +2,7 @@
 # -*- mode: makefile; coding: utf-8 -*-
 
 # See also: scikits-learn
+export HOME=/tmp
 
 # don't optimize pngs, palette changes break tests and documented examples
 export NO_PNG_PKG_MANGLE := 1
@@ -22,6 +23,9 @@ export PYBUILD_TEST_PYTEST := 1
 
 # Disable failures on warnings
 export SKIMAGE_TEST_STRICT_WARNINGS := False
+
+# Hotfix for #1022461: Force setuptools to be compatible with older version
+export SETUPTOOLS_USE_DISTUTILS=stdlib
 
 %:
 	dh $@ --with python3,sphinxdoc --buildsystem pybuild
@@ -59,7 +63,7 @@ ifeq (,$(filter nodoc,$(DEB_BUILD_OPTIONS)))
 		SPHINXOPTS="-D mathjax_path=MathJax.js" \
 		$(MAKE) -C doc html
 endif
-	dh_installdocs -A CONTRIBUTORS.txt README.md CONTRIBUTING.txt
+	dh_installdocs -A CONTRIBUTORS.txt README.md CONTRIBUTING.rst
 
 # Test data and plugin ini not copied to .pybuild -- manually copy them
 override_dh_auto_build:

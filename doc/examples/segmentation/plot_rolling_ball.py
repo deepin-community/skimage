@@ -36,9 +36,9 @@ this is the case for your image, you can directly use the filter like so:
 
 """
 
-import imageio
 import matplotlib.pyplot as plt
 import numpy as np
+import pywt
 
 from skimage import (
     data, restoration, util
@@ -172,7 +172,7 @@ plt.show()
 #
 # Note: The radius is equal to the length of a semi-axis of an
 # ellipsis, which is *half* a full axis. Hence, the kernel shape is
-# multipled by two.
+# multiplied by two.
 
 normalized_radius = 70.5 / 255
 image = util.img_as_float(data.coins())
@@ -293,4 +293,24 @@ background = restoration.rolling_ball(
 )
 
 plot_result(image[30, ...], background[30, ...])
+plt.show()
+
+######################################################################
+# 1D Signal Filtering
+# -------------------
+#
+# As another example of the n-dimensional feature of
+# ``rolling_ball``, we show an implementation for 1D data. Here,
+# we are interested in removing the background signal of an ECG waveform
+# to detect prominent peaks (higher values than the local baseline).
+# Smoother peaks can be removed with smaller values of the radius.
+
+x = pywt.data.ecg()
+background = restoration.rolling_ball(x, radius=80)
+background2 = restoration.rolling_ball(x, radius=10)
+plt.figure()
+plt.plot(x, label='original')
+plt.plot(x - background, label='radius=80')
+plt.plot(x - background2, label='radius=10')
+plt.legend()
 plt.show()

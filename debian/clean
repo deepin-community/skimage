@@ -1,4 +1,5 @@
 doc/examples/applications/plot_3d_image_processing.py
+doc/examples/applications/plot_fluorescence_nuclear_envelope.py
 doc/examples/applications/plot_human_mitosis.py
 doc/examples/applications/plot_rank_filters.py
 doc/examples/color_exposure/plot_adapt_hist_eq_3d.py
@@ -10,3 +11,11 @@ doc/examples/registration/plot_opticalflow.py
 doc/examples/segmentation/plot_marked_watershed.py
 doc/examples/segmentation/plot_rolling_ball.py
 doc/examples/segmentation/plot_trainable_segmentation.py
+doc/examples/filters/plot_blur_effect.py
+doc/examples/applications/plot_3d_interaction.py
+doc/examples/applications/plot_3d_structure_tensor.py
+doc/examples/data/plot_3d.py
+doc/examples/segmentation/plot_regionprops.py
+doc/examples/applications/plot_solidification_tracking.py
+doc/examples/applications/plot_colocalization_metrics.py
+doc/examples/applications/plot_cornea_spot_inpainting.py

@@ -36,7 +36,6 @@ is not rocket science.
 .. [6] https://en.wikipedia.org/wiki/K-means_clustering
 .. [7] https://en.wikipedia.org/wiki/Lateral_geniculate_nucleus
 """
-import numpy as np
 from scipy.cluster.vq import kmeans2
 from scipy import ndimage as ndi
 import matplotlib.pyplot as plt
@@ -45,8 +44,6 @@ from skimage import data
 from skimage import color
 from skimage.util.shape import view_as_windows
 from skimage.util import montage
-
-np.random.seed(42)
 
 patch_shape = 8, 8
 n_filters = 49

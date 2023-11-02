@@ -1,0 +1,17 @@
+Bug-Database: https://github.com/scikit-image/scikit-image/issues
+Bug-Submit: https://github.com/scikit-image/scikit-image/issues/new
+Reference:
+  author: >
+    Stéfan van der Walt and Johannes L. Schönberger and Juan
+    Nunez-Iglesias and François Boulogne and Joshua D. Warner and Neil
+    Yager and Emmanuelle Gouillart and Tony Yu and the scikit-image
+    contributors
+  title: "scikit-image: Image processing in Python"
+  journal: PeerJ
+  volume: 2
+  pages: e453
+  year: 2014
+  eprint: https://doi.org/10.7717/peerj.453
+  issn: 2167-8359
+Repository: https://github.com/scikit-image/scikit-image.git
+Repository-Browse: https://github.com/scikit-image/scikit-image

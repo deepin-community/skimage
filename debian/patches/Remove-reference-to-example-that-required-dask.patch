@@ -1,0 +1,22 @@
+From: Ole Streicher <olebole@debian.org>
+Date: Sun, 15 Jan 2023 13:13:09 +0100
+Subject: Remove reference to example that required dask
+
+---
+ skimage/feature/haar.py | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/skimage/feature/haar.py b/skimage/feature/haar.py
+index c166fa8..c93fc5b 100644
+--- a/skimage/feature/haar.py
++++ b/skimage/feature/haar.py
+@@ -140,9 +140,6 @@ def haar_like_feature(int_image, r, c, width, height, feature_type=None,
+     performance. The rule of thumb is as follows: use multiprocessing when
+     extracting features for all possible ROI in an image; use threading when
+     extracting the feature at specific location for a limited number of ROIs.
+-    Refer to the example
+-    :ref:`sphx_glr_auto_examples_applications_plot_haar_extraction_selection_classification.py`
+-    for more insights.
+ 
+     Examples
+     --------

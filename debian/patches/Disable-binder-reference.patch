@@ -7,23 +7,23 @@ Subject: Disable binder reference
  1 file changed, 10 deletions(-)
 
 diff --git a/doc/source/conf.py b/doc/source/conf.py
-index b540e88..af50b1d 100644
+index b32e78e..8038a3c 100644
 --- a/doc/source/conf.py
 +++ b/doc/source/conf.py
-@@ -179,16 +179,6 @@ sphinx_gallery_conf = {
-         '../examples/applications',
-         '../examples/developers',
-     ]),
--    'binder': {
+@@ -107,16 +107,6 @@ sphinx_gallery_conf = {
+             "../examples/developers",
+         ]
+     ),
+-    "binder": {
 -        # Required keys
--        'org': 'scikit-image',
--        'repo': 'scikit-image',
--        'branch': binder_branch,  # Can be any branch, tag, or commit hash
--        'binderhub_url': 'https://mybinder.org',  # Any URL of a binderhub.
--        'dependencies': '../../.binder/requirements.txt',
+-        "org": "scikit-image",
+-        "repo": "scikit-image",
+-        "branch": binder_branch,  # Can be any branch, tag, or commit hash
+-        "binderhub_url": "https://mybinder.org",  # Any URL of a binderhub.
+-        "dependencies": ["../../.binder/requirements.txt", "../../.binder/runtime.txt"],
 -        # Optional keys
--        'use_jupyter_lab': False
--     },
+-        "use_jupyter_lab": False,
+-    },
      # Remove sphinx_gallery_thumbnail_number from generated files
-     'remove_config_comments':True,
+     "remove_config_comments": True,
  }
