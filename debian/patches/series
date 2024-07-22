@@ -1,5 +1,4 @@
 Skip-failing-test-on-big-endian-architectures.patch
-Don-t-download-intersphinx-mapping.patch
 Disable-test-that-requires-local-server.patch
 Disable-binder-reference.patch
 Skip-tests-that-need-the-python3-pooch-package-and-intern.patch
@@ -13,4 +12,8 @@ Remove-version-switch-in-docs.patch
 Skip-stability-tests-that-fails-no-many-platforms.patch
 Skip-16-bit-roundtrip-PNG-test.patch
 Don-t-fail-on-passed-tests-that-were-marked-as-xfail.patch
-Increase-tolerance-for-moments-test-on-32-bit.patch
+Remove-sphinx_gallery-dependency.patch
+Don-t-turn-deprecation-warnings-into-errors.patch
+Account-for-np.bincount-expecting-arch-specific-np.intp.patch
+Try-np.can_cast-based-solution.patch
+Ignore-RuntimeWarnings-in-tests.patch
