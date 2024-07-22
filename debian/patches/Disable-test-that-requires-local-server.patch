@@ -1,5 +1,5 @@
 From: Ole Streicher <olebole@debian.org>
-Date: Wed, 18 Dec 2019 16:03:52 +0100
+Date: Thu, 20 Jun 2024 17:58:40 +0200
 Subject: Disable test that requires local server
 
 While the required package (python3-pytest-localserver) is available
@@ -40,26 +40,18 @@ host = '127.0.0.1:9', h = <http.client.HTTPConnection object at 0x7fabb463b2b0>
 E               urllib.error.URLError: <urlopen error [Errno 111] Connection refused>
 ```
 ---
- skimage/io/tests/test_io.py | 2 ++
- 1 file changed, 2 insertions(+)
+ skimage/io/tests/test_io.py | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/skimage/io/tests/test_io.py b/skimage/io/tests/test_io.py
-index 22935ae..e1c7bce 100644
+index aacda56..b6b00a9 100644
 --- a/skimage/io/tests/test_io.py
 +++ b/skimage/io/tests/test_io.py
-@@ -1,6 +1,7 @@
- import os
- import pathlib
- import tempfile
-+import pytest
- 
- import numpy as np
- import pytest
-@@ -47,6 +48,7 @@ def test_imread_file_url():
+@@ -48,6 +48,7 @@ def test_imread_file_url():
      assert image.shape == (512, 512)
  
  
 +@pytest.mark.xfail(reason="Local server does not run at build time")
+ @pytest.mark.skipif(is_wasm, reason="no access to pytest-localserver")
  def test_imread_http_url(httpserver):
      # httpserver is a fixture provided by pytest-localserver
-     # https://bitbucket.org/pytest-dev/pytest-localserver/

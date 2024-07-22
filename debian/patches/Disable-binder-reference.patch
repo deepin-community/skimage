@@ -7,10 +7,10 @@ Subject: Disable binder reference
  1 file changed, 10 deletions(-)
 
 diff --git a/doc/source/conf.py b/doc/source/conf.py
-index b32e78e..8038a3c 100644
+index 8e6b4c6..01bec67 100644
 --- a/doc/source/conf.py
 +++ b/doc/source/conf.py
-@@ -107,16 +107,6 @@ sphinx_gallery_conf = {
+@@ -114,16 +114,6 @@ sphinx_gallery_conf = {
              "../examples/developers",
          ]
      ),

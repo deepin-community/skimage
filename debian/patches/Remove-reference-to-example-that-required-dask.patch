@@ -7,10 +7,10 @@ Subject: Remove reference to example that required dask
  1 file changed, 3 deletions(-)
 
 diff --git a/skimage/feature/haar.py b/skimage/feature/haar.py
-index c166fa8..c93fc5b 100644
+index 6cdc407..d3fe775 100644
 --- a/skimage/feature/haar.py
 +++ b/skimage/feature/haar.py
-@@ -140,9 +140,6 @@ def haar_like_feature(int_image, r, c, width, height, feature_type=None,
+@@ -141,9 +141,6 @@ def haar_like_feature(
      performance. The rule of thumb is as follows: use multiprocessing when
      extracting features for all possible ROI in an image; use threading when
      extracting the feature at specific location for a limited number of ROIs.

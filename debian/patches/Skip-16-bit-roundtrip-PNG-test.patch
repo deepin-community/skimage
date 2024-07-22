@@ -8,10 +8,10 @@ https://github.com/scikit-image/scikit-image/issues/6994
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/skimage/io/tests/test_imageio.py b/skimage/io/tests/test_imageio.py
-index a434370..59cf026 100644
+index 6a20cdc..cf37e0e 100644
 --- a/skimage/io/tests/test_imageio.py
 +++ b/skimage/io/tests/test_imageio.py
-@@ -49,7 +49,7 @@ class TestSave:
+@@ -48,7 +48,7 @@ class TestSave:
              # float32, float64 can't be saved as PNG and raise
              # uint32 is not roundtripping properly
              ((10, 10), np.uint8),

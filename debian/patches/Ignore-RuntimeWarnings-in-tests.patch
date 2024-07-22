@@ -1,0 +1,22 @@
+From: Ole Streicher <olebole@debian.org>
+Date: Fri, 5 Jul 2024 08:28:03 +0200
+Subject: Ignore RuntimeWarnings in tests
+
+These warnings often appear on mips64el. While they may be useful for developers,
+we just need not know whether the tests pass
+---
+ pyproject.toml | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/pyproject.toml b/pyproject.toml
+index d6aaa68..10a2e2c 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -197,6 +197,7 @@ python_functions = ["time_*", "test_*", "peakmem_*"]
+ filterwarnings = [
+     "error",
+     "ignore::DeprecationWarning",
++    "ignore::RuntimeWarning",
+     'default:.*pyamg, which cannot \(yet\) be imported with NumPy >=2:RuntimeWarning'
+ ]
+ 

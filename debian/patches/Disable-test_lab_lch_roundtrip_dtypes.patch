@@ -9,10 +9,10 @@ https://github.com/scikit-image/scikit-image/issues/6670
  1 file changed, 1 insertion(+)
 
 diff --git a/skimage/color/tests/test_colorconv.py b/skimage/color/tests/test_colorconv.py
-index b993c9f..43c63a4 100644
+index 4713c92..8c520b3 100644
 --- a/skimage/color/tests/test_colorconv.py
 +++ b/skimage/color/tests/test_colorconv.py
-@@ -967,6 +967,7 @@ def test_rgba2rgb_dtypes(dtype):
+@@ -1050,6 +1050,7 @@ def test_rgba2rgb_dtypes(dtype):
      assert_almost_equal(rgb, expected)
  
  
