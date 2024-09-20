@@ -1,3 +1,9 @@
+skimage (0.22.0-2deepin1deepin0) unstable; urgency=medium
+
+  * No source change upload against GCC 12.
+
+ -- Tianyu Chen <sweetyfish@deepin.org>  Fri, 20 Sep 2024 12:18:38 +0800
+
 skimage (0.22.0-2deepin1) unstable; urgency=medium
 
   * No source change upload against python 3.12.
