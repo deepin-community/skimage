@@ -1,0 +1,21 @@
+From: Ole Streicher <olebole@debian.org>
+Date: Thu, 30 Jan 2025 11:50:39 +0100
+Subject: IGnore UserWarning for missing pyamg
+
+pyamg is not packaged for Debian yet.
+---
+ pyproject.toml | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/pyproject.toml b/pyproject.toml
+index e999f5f..573d926 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -192,6 +192,7 @@ filterwarnings = [
+     "error",
+     "ignore::DeprecationWarning",
+     "ignore::RuntimeWarning",
++    "ignore:.*requires pyamg.*:UserWarning",
+     "ignore:.*use `imageio` or other I/O packages directly.*:FutureWarning:skimage",
+     "ignore:Implicit conversion of A to CSR:scipy.sparse.SparseEfficiencyWarning"  # warn by pyamg in ruge_stuben_solver
+ ]

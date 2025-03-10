@@ -8,10 +8,10 @@ myst-parser is not available in Debian
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/doc/source/conf.py b/doc/source/conf.py
-index 01bec67..3f1f899 100644
+index 3f43dfc..4fca054 100644
 --- a/doc/source/conf.py
 +++ b/doc/source/conf.py
-@@ -54,7 +54,7 @@ extensions = [
+@@ -55,7 +55,7 @@ extensions = [
      "numpydoc",
      "sphinx_design",
      "matplotlib.sphinxext.plot_directive",

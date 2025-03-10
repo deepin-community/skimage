@@ -15,3 +15,4 @@ Reference:
   issn: 2167-8359
 Repository: https://github.com/scikit-image/scikit-image.git
 Repository-Browse: https://github.com/scikit-image/scikit-image
+Security-Contact: https://github.com/scikit-image/scikit-image/tree/HEAD/SECURITY.md

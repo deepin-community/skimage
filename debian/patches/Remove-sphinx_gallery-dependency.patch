@@ -3,15 +3,15 @@ Date: Mon, 11 Dec 2023 11:38:35 +0100
 Subject: Remove sphinx_gallery dependency
 
 ---
- doc/source/conf.py | 30 +-----------------------------
- 1 file changed, 1 insertion(+), 29 deletions(-)
+ doc/source/conf.py | 34 +---------------------------------
+ 1 file changed, 1 insertion(+), 33 deletions(-)
 
 diff --git a/doc/source/conf.py b/doc/source/conf.py
-index 08d439b..4fa9039 100644
+index efcd864..117c0bc 100644
 --- a/doc/source/conf.py
 +++ b/doc/source/conf.py
-@@ -13,8 +13,6 @@ import plotly.io as pio
- import skimage
+@@ -14,8 +14,6 @@ import skimage
+ from intersphinx_registry import get_intersphinx_mapping
  from packaging.version import parse
  from plotly.io._sg_scraper import plotly_sg_scraper
 -from sphinx_gallery.sorting import ExplicitOrder
@@ -19,7 +19,7 @@ index 08d439b..4fa9039 100644
  
  filterwarnings(
      "ignore", message="Matplotlib is currently using agg", category=UserWarning
-@@ -49,7 +47,6 @@ extensions = [
+@@ -50,7 +48,6 @@ extensions = [
      "sphinx.ext.linkcode",
      "sphinx.ext.mathjax",
      "sphinx_copybutton",
@@ -27,7 +27,7 @@ index 08d439b..4fa9039 100644
      "doi_role",
      "numpydoc",
      "sphinx_design",
-@@ -92,34 +89,9 @@ else:
+@@ -93,38 +90,9 @@ else:
  
  pio.renderers.default = "sphinx_gallery_png"
  
@@ -55,6 +55,10 @@ index 08d439b..4fa9039 100644
 -    ),
 -    # Remove sphinx_gallery_thumbnail_number from generated files
 -    "remove_config_comments": True,
+-    # `True` defaults to the number of jobs used by Sphinx (see its flag `-j`)
+-    #   Temporarily disabled because plotly scraper isn't parallel-safe
+-    #   (see https://github.com/plotly/plotly.py/issues/4959)!
+-    # "parallel": True,
 -}
  
  

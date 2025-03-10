@@ -1,0 +1,44 @@
+From: Ole Streicher <olebole@debian.org>
+Date: Thu, 30 Jan 2025 12:39:07 +0100
+Subject: Remove intersphinx_registry dependency
+
+The intersphinx_registry Python package is not available in Debian.
+---
+ doc/source/conf.py | 17 -----------------
+ 1 file changed, 17 deletions(-)
+
+diff --git a/doc/source/conf.py b/doc/source/conf.py
+index 71793fd..e2fea67 100644
+--- a/doc/source/conf.py
++++ b/doc/source/conf.py
+@@ -11,7 +11,6 @@ from warnings import filterwarnings
+ 
+ import plotly.io as pio
+ import skimage
+-from intersphinx_registry import get_intersphinx_mapping
+ from packaging.version import parse
+ from plotly.io._sg_scraper import plotly_sg_scraper
+ 
+@@ -205,22 +204,6 @@ latex_domain_indices = False
+ numpydoc_show_class_members = False
+ numpydoc_class_members_toctree = False
+ 
+-# -- intersphinx --------------------------------------------------------------
+-# ...
+-intersphinx_mapping = get_intersphinx_mapping(
+-    packages={
+-        "python",
+-        "numpy",
+-        "neps",
+-        "scipy",
+-        "sklearn",
+-        "matplotlib",
+-        "networkx",
+-        "plotly",
+-        "seaborn",
+-    }
+-)
+-
+ # Do not (yet) use nitpicky mode for checking cross-references
+ nitpicky = False
+ # nitpick_ignore is only considered when nitpicky=True

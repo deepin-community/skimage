@@ -8,7 +8,7 @@ Subject: Skip failing test on big endian architectures
  2 files changed, 4 insertions(+), 1 deletion(-)
 
 diff --git a/skimage/io/tests/test_pil.py b/skimage/io/tests/test_pil.py
-index 1678e99..36fd3d2 100644
+index 418bee5..1337605 100644
 --- a/skimage/io/tests/test_pil.py
 +++ b/skimage/io/tests/test_pil.py
 @@ -1,4 +1,5 @@
@@ -17,14 +17,14 @@ index 1678e99..36fd3d2 100644
  from io import BytesIO
  from tempfile import NamedTemporaryFile
  
-@@ -266,6 +267,8 @@ def test_all_color():
+@@ -269,6 +270,8 @@ def test_all_color():
          color_check('pil', 'bmp')
  
  
 +# https://github.com/scikit-image/scikit-image/issues/2120
 +@testing.skipif(sys.byteorder == 'big', reason="https://github.com/scikit-image/scikit-image/issues/2120")
  def test_all_mono():
-     with expected_warnings(['.* is a boolean image']):
+     with expected_warnings(['.* is a boolean image', plugin_deprecation_warning]):
          mono_check('pil')
 diff --git a/skimage/io/tests/test_tifffile.py b/skimage/io/tests/test_tifffile.py
 index e4c157d..4f37659 100644

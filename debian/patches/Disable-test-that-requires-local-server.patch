@@ -44,7 +44,7 @@ E               urllib.error.URLError: <urlopen error [Errno 111] Connection ref
  1 file changed, 1 insertion(+)
 
 diff --git a/skimage/io/tests/test_io.py b/skimage/io/tests/test_io.py
-index aacda56..b6b00a9 100644
+index d76499a..b6fc5af 100644
 --- a/skimage/io/tests/test_io.py
 +++ b/skimage/io/tests/test_io.py
 @@ -48,6 +48,7 @@ def test_imread_file_url():
