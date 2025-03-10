@@ -7,10 +7,10 @@ Subject: Skip stability tests that fails no many platforms
  1 file changed, 1 insertion(+)
 
 diff --git a/skimage/measure/tests/test_fit.py b/skimage/measure/tests/test_fit.py
-index 0e68046..4d30f16 100644
+index c23a4fa..7124e10 100644
 --- a/skimage/measure/tests/test_fit.py
 +++ b/skimage/measure/tests/test_fit.py
-@@ -238,6 +238,7 @@ def test_ellipse_model_estimate():
+@@ -239,6 +239,7 @@ def test_ellipse_model_estimate():
          assert_array_less(res, np.ones(res.shape))
  
  

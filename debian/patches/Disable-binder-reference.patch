@@ -7,10 +7,10 @@ Subject: Disable binder reference
  1 file changed, 10 deletions(-)
 
 diff --git a/doc/source/conf.py b/doc/source/conf.py
-index 8e6b4c6..01bec67 100644
+index 9e2915c..3f43dfc 100644
 --- a/doc/source/conf.py
 +++ b/doc/source/conf.py
-@@ -114,16 +114,6 @@ sphinx_gallery_conf = {
+@@ -115,16 +115,6 @@ sphinx_gallery_conf = {
              "../examples/developers",
          ]
      ),
@@ -26,4 +26,4 @@ index 8e6b4c6..01bec67 100644
 -    },
      # Remove sphinx_gallery_thumbnail_number from generated files
      "remove_config_comments": True,
- }
+     # `True` defaults to the number of jobs used by Sphinx (see its flag `-j`)

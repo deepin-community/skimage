@@ -1,3 +1,72 @@
+skimage (0.25.2-1) unstable; urgency=medium
+
+  * Copy keypoints if necessary to preserve contiguity
+  * New upstream version 0.25.2
+  * Remove patches that are applied upstream
+  * Skip test_polynomial_weighted_estimation test that fails on Debian
+
+ -- Ole Streicher <olebole@debian.org>  Sat, 22 Feb 2025 12:34:43 +0100
+
+skimage (0.25.1-1) unstable; urgency=medium
+
+  * New upstream version 0.25.1
+  * Rediff patches
+  * Adopt to numpy 2.2 (Closes: #1094689)
+  * Ignore UserWarning for missing pyamg
+  * Remove intersphinx_registry dependency
+  * Adjust installed documentation files
+  * Copy keypoints if necessary to preserve contiguity
+
+ -- Ole Streicher <olebole@debian.org>  Wed, 05 Feb 2025 15:14:23 +0100
+
+skimage (0.24.0-7) unstable; urgency=medium
+
+  [ Gianfranco Costamagna ]
+  * Team upload
+
+  [ zhangdandan <zhangdandan@loongson.cn> ]
+  * Actually add patch
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Tue, 24 Dec 2024 08:10:04 +0100
+
+skimage (0.24.0-6) unstable; urgency=medium
+
+  [ Gianfranco Costamagna ]
+  * Team upload
+
+  [ zhangdandan <zhangdandan@loongson.cn> ]
+  * From skimage-skip-some-failure-tests-on-loong64-temporarily.patch:
+    ignore some failing tests on loong64 (Closes: #1089086
+
+ -- Gianfranco Costamagna <locutusofborg@debian.org>  Mon, 23 Dec 2024 19:09:26 +0100
+
+skimage (0.24.0-5) unstable; urgency=medium
+
+  * Team upload.
+  * Remove use of python3-pydata-sphinx-theme for now.
+  * Added patch to link docs to the packaged docs, not remote websites.
+  * Run the autopkgtests for all supported Python versions
+  * Build-Depends: s/dh-python/dh-sequence-python3/ (routine-update)
+  * likewise use dh-sequence-sphinxdoc and simplify d/rules
+
+ -- Michael R. Crusoe <crusoe@debian.org>  Mon, 14 Oct 2024 12:40:24 +0200
+
+skimage (0.24.0-4) unstable; urgency=medium
+
+  * Team upload.
+  * Skip failing tests on mips64el (Closes: #1076289)
+  * _parse_docs: handle change to docstring indentation in Python 3.13
+    (Closes: #1084732)
+
+ -- Jochen Sprickerhof <jspricke@debian.org>  Fri, 11 Oct 2024 10:49:52 +0200
+
+skimage (0.24.0-3) unstable; urgency=medium
+
+  * Team upload
+  * Update to current cython3 (Closes: #1078524)
+
+ -- Bastian Germann <bage@debian.org>  Thu, 05 Sep 2024 12:18:25 +0200
+
 skimage (0.24.0-2) unstable; urgency=medium
 
   * Ignore RuntimeWarnings in tests

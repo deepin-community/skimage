@@ -7,14 +7,14 @@ Subject: Don't fail on passed tests that were marked as xfail
  1 file changed, 1 deletion(-)
 
 diff --git a/pyproject.toml b/pyproject.toml
-index b00d7d2..53de334 100644
+index 974f000..f8c8298 100644
 --- a/pyproject.toml
 +++ b/pyproject.toml
-@@ -190,7 +190,6 @@ convention = 'numpy'
+@@ -185,7 +185,6 @@ convention = 'numpy'
  minversion = "6.0"
  addopts = "-ra  --strict-config  --strict-markers"
  log_cli_level = "INFO"
 -xfail_strict = true
- #testpaths = ["skimage", "../../../../../benchmarks"]
+ testpaths = ["skimage", "benchmarks"]
  python_files = ["benchmark_*.py", "test_*.py"]
  python_classes = ["Test*", "*Suite"]

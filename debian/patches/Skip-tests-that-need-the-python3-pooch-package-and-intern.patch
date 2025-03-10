@@ -7,19 +7,19 @@ python3-pooch is not available yet (RFS #968470)
 ---
  skimage/data/tests/test_data.py                          | 16 ++++++++++++++++
  skimage/filters/rank/tests/test_rank.py                  |  3 +--
- skimage/measure/tests/test_blur_effect.py                |  2 ++
+ skimage/measure/tests/test_blur_effect.py                |  1 +
  skimage/morphology/tests/test_gray.py                    |  4 ++++
  .../tests/test_masked_phase_cross_correlation.py         |  1 +
  .../registration/tests/test_phase_cross_correlation.py   |  1 +
  skimage/restoration/tests/test_restoration.py            |  1 +
  skimage/restoration/tests/test_rolling_ball.py           |  1 +
- 8 files changed, 27 insertions(+), 2 deletions(-)
+ 8 files changed, 26 insertions(+), 2 deletions(-)
 
 diff --git a/skimage/data/tests/test_data.py b/skimage/data/tests/test_data.py
-index c193c49..19b1125 100644
+index 301306c..663bbc6 100644
 --- a/skimage/data/tests/test_data.py
 +++ b/skimage/data/tests/test_data.py
-@@ -9,6 +9,15 @@ import os
+@@ -7,6 +7,15 @@ import os
  import pytest
  
  
@@ -35,7 +35,7 @@ index c193c49..19b1125 100644
  def test_download_all_with_pooch():
      # jni first wrote this test with the intention of
      # fully deleting the files in the data_dir,
-@@ -64,6 +73,7 @@ def test_coffee():
+@@ -62,6 +71,7 @@ def test_coffee():
      data.coffee()
  
  
@@ -43,7 +43,7 @@ index c193c49..19b1125 100644
  def test_eagle():
      """Test that "eagle" image can be loaded."""
      # Fetching the data through the testing module will
-@@ -139,6 +149,7 @@ def test_lfw_subset():
+@@ -137,6 +147,7 @@ def test_lfw_subset():
      data.lfw_subset()
  
  
@@ -51,7 +51,7 @@ index c193c49..19b1125 100644
  def test_skin():
      """Test that "skin" image can be loaded.
  
-@@ -153,6 +164,7 @@ def test_cell():
+@@ -151,6 +162,7 @@ def test_cell():
      data.cell()
  
  
@@ -59,7 +59,7 @@ index c193c49..19b1125 100644
  def test_cells3d():
      """Needs internet connection."""
      path = fetch('data/cells3d.tif')
-@@ -160,6 +172,7 @@ def test_cells3d():
+@@ -158,6 +170,7 @@ def test_cells3d():
      assert image.shape == (60, 2, 256, 256)
  
  
@@ -67,23 +67,23 @@ index c193c49..19b1125 100644
  def test_brain_3d():
      """Needs internet connection."""
      path = fetch('data/brain.tiff')
-@@ -167,6 +180,7 @@ def test_brain_3d():
+@@ -165,6 +178,7 @@ def test_brain_3d():
      assert image.shape == (10, 256, 256)
  
  
 +@pytest.mark.skip(reason="requires data downloaded from internet")
- @pytest.mark.xfail(
-     Version(np.__version__) >= Version('2.0.0.dev0'),
-     reason='tifffile uses deprecated attribute `ndarray.newbyteorder`',
-@@ -181,6 +195,7 @@ def test_kidney_3d_multichannel():
+ def test_kidney_3d_multichannel():
+     """Test that 3D multichannel image of kidney tissue can be loaded.
+ 
+@@ -175,6 +189,7 @@ def test_kidney_3d_multichannel():
      assert kidney.shape == (16, 512, 512, 3)
  
  
 +@pytest.mark.skip(reason="requires data downloaded from internet")
- @pytest.mark.xfail(
-     Version(np.__version__) >= Version('2.0.0.dev0'),
-     reason='tifffile uses deprecated attribute `ndarray.newbyteorder`',
-@@ -195,6 +210,7 @@ def test_lily_multichannel():
+ def test_lily_multichannel():
+     """Test that microscopy image of lily of the valley can be loaded.
+ 
+@@ -185,6 +200,7 @@ def test_lily_multichannel():
      assert lily.shape == (922, 922, 4)
  
  
@@ -120,27 +120,22 @@ index 2f82c8b..5758bbd 100644
          @run_in_parallel(warnings_matching=['Possible precision loss'])
          def check():
 diff --git a/skimage/measure/tests/test_blur_effect.py b/skimage/measure/tests/test_blur_effect.py
-index a81d0b7..c4aa0c4 100644
+index bfd622b..e126435 100644
 --- a/skimage/measure/tests/test_blur_effect.py
 +++ b/skimage/measure/tests/test_blur_effect.py
-@@ -1,3 +1,4 @@
-+import pytest
- from numpy.testing import assert_array_equal
- 
- from skimage.color import rgb2gray
-@@ -42,6 +43,7 @@ def test_blur_effect_channel_axis():
-     assert_array_equal(B0_arr, B1_arr)
+@@ -44,6 +44,7 @@ def test_blur_effect_channel_axis():
+     np.testing.assert_array_equal(B0_arr, B1_arr)
  
  
 +@pytest.mark.skip(reason="Needs python3-pooch and internet connection")
  def test_blur_effect_3d():
      """Test that the blur metric works on a 3D image."""
-     image_3d = cells3d()[:, 1, :, :]  # grab just the nuclei
+     image_3d = ski.data.cells3d()[:, 1, :, :]  # grab just the nuclei
 diff --git a/skimage/morphology/tests/test_gray.py b/skimage/morphology/tests/test_gray.py
-index 95faec4..3666d91 100644
+index 7073f22..e392c85 100644
 --- a/skimage/morphology/tests/test_gray.py
 +++ b/skimage/morphology/tests/test_gray.py
-@@ -64,6 +64,8 @@ class TestMorphology:
+@@ -67,6 +67,8 @@ class TestMorphology:
  
          return output
  
@@ -149,7 +144,7 @@ index 95faec4..3666d91 100644
      def test_gray_morphology(self):
          expected = dict(np.load(fetch('data/gray_morph_output.npz')))
          calculated = self._build_expected_output()
-@@ -463,6 +465,7 @@ def test_octagon_decomposition(cam_image, function, m, n, decomposition):
+@@ -449,6 +451,7 @@ def test_octagon_decomposition(cam_image, function, m, n, decomposition):
          assert_array_equal(expected, out)
  
  
@@ -157,7 +152,7 @@ index 95faec4..3666d91 100644
  @pytest.mark.parametrize(
      "function",
      ["erosion", "dilation", "closing", "opening", "white_tophat", "black_tophat"],
-@@ -482,6 +485,7 @@ def test_cube_decomposition(cell3d_image, function, size, decomposition):
+@@ -468,6 +471,7 @@ def test_cube_decomposition(cell3d_image, function, shape, decomposition):
      assert_array_equal(expected, out)
  
  

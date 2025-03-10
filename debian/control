@@ -4,9 +4,9 @@ Uploaders: Yaroslav Halchenko <debian@onerussian.com>,
            Ole Streicher <olebole@debian.org>
 Section: python
 Priority: optional
-Build-Depends: cython3-legacy,
+Build-Depends: cython3,
                debhelper-compat (= 13),
-               dh-python,
+               dh-sequence-python3,
                ninja-build,
                pybuild-plugin-pyproject,
                python3-all-dev,
@@ -33,12 +33,17 @@ Build-Depends: cython3-legacy,
                python3-tifffile,
                python3-tk,
                dh-strip-nondeterminism
-Build-Depends-Indep: python3-doc,
-                     python3-pydata-sphinx-theme,
+Build-Depends-Indep: dh-sequence-sphinxdoc,
+                     python3-doc,
+                     python-numpy-doc,
+                     python-scipy-doc,
+                     python-sklearn-doc,
+                     python-matplotlib-doc,
                      python3-sklearn,
                      python3-sphinx,
                      python3-sphinx-copybutton,
                      python3-sphinx-design
+#                    python3-pydata-sphinx-theme,
 Standards-Version: 4.7.0
 Vcs-Browser: https://salsa.debian.org/science-team/skimage
 Vcs-Git: https://salsa.debian.org/science-team/skimage.git

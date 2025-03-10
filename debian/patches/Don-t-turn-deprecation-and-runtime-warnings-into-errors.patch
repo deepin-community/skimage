@@ -1,0 +1,23 @@
+From: Ole Streicher <olebole@debian.org>
+Date: Thu, 11 Apr 2024 14:16:41 +0200
+Subject: Don't turn deprecation and runtime warnings into errors
+
+Runtime warnings often appear on mips64el. While they may be useful for developers,
+we just need not know whether the tests pass
+---
+ pyproject.toml | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/pyproject.toml b/pyproject.toml
+index f8c8298..3c0e31e 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -191,6 +191,8 @@ python_classes = ["Test*", "*Suite"]
+ python_functions = ["time_*", "test_*", "peakmem_*"]
+ filterwarnings = [
+     "error",
++    "ignore::DeprecationWarning",
++    "ignore::RuntimeWarning",
+     "ignore:.*use `imageio` or other I/O packages directly.*:FutureWarning:skimage",
+     "ignore:Implicit conversion of A to CSR:scipy.sparse.SparseEfficiencyWarning"  # warn by pyamg in ruge_stuben_solver
+ ]

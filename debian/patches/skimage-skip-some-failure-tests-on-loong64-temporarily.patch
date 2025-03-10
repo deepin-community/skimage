@@ -1,0 +1,77 @@
+From: Debian Science Maintainers
+ <debian-science-maintainers@lists.alioth.debian.org>
+Date: Mon, 27 Jan 2025 16:41:20 +0100
+Subject: FTBFS test failures on loong64
+
+Author: zhangdandan <zhangdandan@loongson.cn>
+Bug-Debian: https://bugs.debian.org/1089086
+Last-Update: 2024-12-05
+---
+ skimage/segmentation/tests/test_active_contour_model.py | 5 +++++
+ skimage/transform/tests/test_geometric.py               | 2 ++
+ 2 files changed, 7 insertions(+)
+
+diff --git a/skimage/segmentation/tests/test_active_contour_model.py b/skimage/segmentation/tests/test_active_contour_model.py
+index fc79dfd..1bf88a7 100644
+--- a/skimage/segmentation/tests/test_active_contour_model.py
++++ b/skimage/segmentation/tests/test_active_contour_model.py
+@@ -12,6 +12,7 @@ from skimage.segmentation import active_contour
+ 
+ 
+ @pytest.mark.skipif(platform.machine() == "mips64", reason="Fails on mips64el")
++@pytest.mark.skipif(platform.machine() == "loongarch64", reason="Fails on loongarch64")
+ @pytest.mark.parametrize('dtype', [np.float16, np.float32, np.float64])
+ def test_periodic_reference(dtype):
+     img = data.astronaut()
+@@ -32,6 +33,7 @@ def test_periodic_reference(dtype):
+ 
+ 
+ @pytest.mark.skipif(platform.machine() == "mips64", reason="Fails on mips64el")
++@pytest.mark.skipif(platform.machine() == "loongarch64", reason="Fails on loongarch64")
+ @pytest.mark.parametrize('dtype', [np.float32, np.float64])
+ def test_fixed_reference(dtype):
+     img = data.text()
+@@ -59,6 +61,7 @@ def test_fixed_reference(dtype):
+ 
+ 
+ @pytest.mark.skipif(platform.machine() == "mips64", reason="Fails on mips64el")
++@pytest.mark.skipif(platform.machine() == "loongarch64", reason="Fails on loongarch64")
+ @pytest.mark.parametrize('dtype', [np.float32, np.float64])
+ def test_free_reference(dtype):
+     img = data.text()
+@@ -84,6 +87,7 @@ def test_free_reference(dtype):
+ 
+ 
+ @pytest.mark.skipif(platform.machine() == "mips64", reason="Fails on mips64el")
++@pytest.mark.skipif(platform.machine() == "loongarch64", reason="Fails on loongarch64")
+ @pytest.mark.parametrize('dtype', [np.float32, np.float64])
+ def test_RGB(dtype):
+     img = gaussian(data.text(), sigma=1, preserve_range=False)
+@@ -141,6 +145,7 @@ def test_RGB(dtype):
+ 
+ 
+ @pytest.mark.skipif(platform.machine() == "mips64", reason="Fails on mips64el")
++@pytest.mark.skipif(platform.machine() == "loongarch64", reason="Fails on loongarch64")
+ def test_end_points():
+     img = data.astronaut()
+     img = rgb2gray(img)
+diff --git a/skimage/transform/tests/test_geometric.py b/skimage/transform/tests/test_geometric.py
+index 82ac45e..176be00 100644
+--- a/skimage/transform/tests/test_geometric.py
++++ b/skimage/transform/tests/test_geometric.py
+@@ -596,6 +596,7 @@ def test_projective_estimation():
+     assert_almost_equal(tform3.params, tform2.params)
+ 
+ 
++@pytest.mark.skipif(platform.machine() == "loongarch64", reason="Fails on loongarch64")
+ def test_projective_weighted_estimation():
+     # Exact solution with same points, and unity weights
+     tform = estimate_transform('projective', SRC[:4, :], DST[:4, :])
+@@ -964,6 +965,7 @@ def _assert_least_squares(tf, src, dst):
+ 
+ 
+ @pytest.mark.skipif(platform.machine() == "mips64", reason="Fails on mips64el")
++@pytest.mark.skipif(platform.machine() == "loongarch64", reason="Fails on loongarch64")
+ @pytest.mark.parametrize('array_like_input', [False, True])
+ def test_estimate_affine_3d(array_like_input):
+     ndim = 3

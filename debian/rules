@@ -25,13 +25,7 @@ export PYBUILD_TEST_PYTEST := 1
 export SKIMAGE_TEST_STRICT_WARNINGS := False
 
 %:
-	dh $@ --with python3,sphinxdoc --buildsystem pybuild
-
-%-arch:
-	dh $@ --with python3 --buildsystem pybuild
-
-clean:
-	dh $@ --with python3 --buildsystem pybuild
+	dh $@ --buildsystem pybuild
 
 override_dh_clean:
 	dh_clean
@@ -60,11 +54,10 @@ ifeq (,$(filter nodoc,$(DEB_BUILD_OPTIONS)))
 		SPHINXOPTS="-D mathjax_path=MathJax.js" \
 		$(MAKE) -C doc html
 endif
-	dh_installdocs -A CONTRIBUTORS.txt README.md CONTRIBUTING.rst
+	dh_installdocs -A CONTRIBUTORS.md README.md CONTRIBUTING.rst SECURITY.md TODO.txt CITATION.cff
 
 # Test data and plugin ini not copied to .pybuild -- manually copy them
-override_dh_auto_build:
-	dh_auto_build
+execute_after_dh_auto_build:
 	for ver in $(PY3VERS); do \
 		i=.pybuild/cpython$${ver%.*}_$$ver/build/skimage; \
 		cp skimage/io/_plugins/*.ini $$i/io/_plugins/; \
@@ -80,17 +73,15 @@ override_dh_auto_build:
 override_dh_auto_test-indep:
 	# pass
 
-override_dh_auto_install:
-	dh_auto_install
+execute_after_dh_auto_install:
 	# cleanup python3 cache (mixing python3 subversions)
 	-find debian/tmp -name "__pycache__" -exec rm -r {} +
 
 ## remove .so libraries from main package, and call dh_numpy3
-override_dh_python3:
+execute_before_dh_python3:
 	-find debian/python3-skimage/usr/lib -name "*.so" -delete
 
 	dh_numpy3 -ppython3-skimage-lib
-	dh_python3
 
 ## immediately useable documentation and exemplar scripts/data
 override_dh_compress:
